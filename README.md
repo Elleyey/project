@@ -51,7 +51,7 @@ De visualisatie zal laten zien hoe het met het vertrouwen in Nederland gesteld i
    - topojson
    - dropdown
 
-**Revieuw(s):** 
+**Review(s):** 
 www.thehappyforecast.com/, houdt het erg simpel en meer informatie te krijgen door door te klikken. Is goede manier om niet te veel informatie in één keer te presenteren. 
  
 **Moeilijkste onderdelen:**
