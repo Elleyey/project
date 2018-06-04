@@ -20,16 +20,16 @@ De visualisatie zal laten zien hoe het met het vertrouwen in Nederland gesteld i
 
 - een referentie naar het bekende 'touwtje in de deur' om op de website te komen. Misschien zet ik hiet nog wat achtergrond informatie neer. 
 
-![Startpagina](doc/pagina1.jpg)
+![Startpagina](docs/pagina1.jpg)
 
 - De eerste pagina laat de landkaart van Europa zien, de kleuren van de landen verwijzen naar het vertrouwen in de medemens van dat land. Wanneer iemand op een land klikt, komt er een barchart OF **scatterplot** tevoorschijn. Er is mogelijkheid te kiezen uit verschillende jaren. 
  - Nog een grafiek toevoegen voor het geklikte land om te zien hoe het vertrouwen is toe/afgenomen in de jaren (wanneer op een bepaalde variabele in de barchart/scatterplot geklikt wordt). 
 
-![Pagina 1](doc/pagina2.jpg)
+![Pagina 1](docs/pagina2.jpg)
 
 - De tweede pagina, waar men kan komen via een menu boven aan de site, laat de data van Nederland zien. De precieze data kan gekozen worden via een dropdown button, naar gender, leeftijd, migratie achtergrond, onderwijs niveau, stedelijkheid en partij keuze. Wellicht maak ik daar nog wat minder keuzes van. 
 
-![Pagina 2](doc/pagina3.png)
+![Pagina 2](docs/pagina3.png)
 
 *Belangrijkste kenmerken:*
  - on click (op landen Europa, verschijnt correcte barchart/scatterplot)
@@ -41,18 +41,20 @@ De visualisatie zal laten zien hoe het met het vertrouwen in Nederland gesteld i
 
 ## Benodigdheden:
 
-- Data: [CBS, Nederland](https://opendata.cbs.nl/statline/#/CBS/nl/dataset/71719NED/table?dl=8CA2), [CBS, Europa](https://opendata.cbs.nl/statline/#/CBS/nl/dataset/80518NED/table?ts=1528103408258). Beschikbaar in JSON, CSV en API. 
-- External Components: 
- - d3
- - d3-tip
- - datamaps
- - topojson
- - dropdown
+**Data:** 
+[CBS, Nederland](https://opendata.cbs.nl/statline/#/CBS/nl/dataset/71719NED/table?dl=8CA2), [CBS, Europa](https://opendata.cbs.nl/statline/#/CBS/nl/dataset/80518NED/table?ts=1528103408258). Beschikbaar in JSON, CSV en API. 
 
-- Revieuw(s): 
- - www.thehappyforecast.com/, houdt het erg simpel en meer informatie te krijgen door door te klikken. Is goede manier om niet te veel informatie in één keer te presenteren. 
+**External Components:**
+   - d3
+   - d3-tip
+   - datamaps
+   - topojson
+   - dropdown
+
+**Revieuw(s):** 
+www.thehappyforecast.com/, houdt het erg simpel en meer informatie te krijgen door door te klikken. Is goede manier om niet te veel informatie in één keer te presenteren. 
  
-- Moeilijkste onderdelen:
+**Moeilijkste onderdelen:**
  - Ik verwacht dat het lastigste onderdeel het linken van alle verschillende pagina's wordt. 
  - Ook moet ik een goede datascructuur opbouwen waarbij de gekozen data doorgegeven wordt en niet steeds werken met if statements. 
  
