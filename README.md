@@ -22,12 +22,12 @@ De visualisatie zal laten zien hoe het met het vertrouwen in Nederland gesteld i
 
 ![Startpagina](docs/pagina1.jpg)
 
-- De eerste pagina laat de landkaart van Europa zien, de kleuren van de landen verwijzen naar het vertrouwen in de medemens van dat land. Wanneer iemand op een land klikt, komt er een barchart OF **scatterplot** tevoorschijn. Er is mogelijkheid te kiezen uit verschillende jaren. 
- - Nog een grafiek toevoegen voor het geklikte land om te zien hoe het vertrouwen is toe/afgenomen in de jaren (wanneer op een bepaalde variabele in de barchart/scatterplot geklikt wordt). 
+- De eerste pagina laat de **landkaart van Europa** zien, de kleuren van de landen verwijzen naar het vertrouwen in de medemens van dat land. Wanneer iemand op een land klikt, komt er een **linechart** tevoorschijn die de gegevens van dat land laat zien over een periode van 3 jaar.
+
 
 ![Pagina 1](docs/pagina2.jpg)
 
-- De tweede pagina, waar men kan komen via een menu boven aan de site, laat de data van Nederland zien. De precieze data kan gekozen worden via een dropdown button, naar gender, leeftijd, migratie achtergrond, onderwijs niveau, stedelijkheid en partij keuze. Wellicht maak ik daar nog wat minder keuzes van. 
+- De tweede pagina, waar men kan komen via **een menu** boven aan de site, laat de data van Nederland zien in een **barchart**. De precieze data kan gekozen worden via een **dropdown button**, naar gender, leeftijd, migratie achtergrond, onderwijs niveau, stedelijkheid en partij keuze. Wellicht maak ik daar nog wat minder keuzes van. 
 
 ![Pagina 2](docs/pagina3.png)
 
@@ -42,7 +42,7 @@ De visualisatie zal laten zien hoe het met het vertrouwen in Nederland gesteld i
 ## Benodigdheden:
 
 **Data:** 
-[CBS, Nederland](https://opendata.cbs.nl/statline/#/CBS/nl/dataset/71719NED/table?dl=8CA2), [CBS, Europa](https://opendata.cbs.nl/statline/#/CBS/nl/dataset/80518NED/table?ts=1528103408258). Beschikbaar in JSON, CSV en API. 
+[CBS, Nederland 2006 - 2012](https://opendata.cbs.nl/statline/#/CBS/nl/dataset/71719NED/table?dl=8CA2), [CBS, Nederland 2012-2017](http://statline.cbs.nl/Statweb/publication/?VW=T&DM=SLNL&PA=82378ned), [CBS, Europa 2010 -2012](https://opendata.cbs.nl/statline/#/CBS/nl/dataset/80518NED/table?ts=1528103408258), [CBS, Europa 2002-2012](http://statline.cbs.nl/StatWeb/publication/?VW=T&DM=SLNL&PA=80518ned&D1=0-7&D2=0&D3=a&D4=a&HD=100816-1530&HDR=T&STB=G1,G2,G3). Beschikbaar in JSON, CSV en API. 
 
 **External Components:**
    - d3
