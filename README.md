@@ -24,16 +24,15 @@ De visualisatie zal laten zien hoe het met het vertrouwen in Nederland gesteld i
 
 - De eerste pagina laat de **landkaart van Europa** zien, de kleuren van de landen verwijzen naar het vertrouwen in de medemens van dat land. Wanneer iemand op een land klikt, komt er een **linechart** tevoorschijn die de gegevens van dat land laat zien over een periode van 3 jaar.
 
+- De tweede pagina, waar men kan komen via **een menu** boven aan de site, laat de data van Nederland zien in een **horizontale barchart**. De precieze data kan gekozen worden via een **dropdown button**, naar gender of opleidingsniveau. 
 
-![Pagina 1](docs/pagina2.jpg)
 
-- De tweede pagina, waar men kan komen via **een menu** boven aan de site, laat de data van Nederland zien in een **barchart**. De precieze data kan gekozen worden via een **dropdown button**, naar gender, leeftijd, migratie achtergrond, onderwijs niveau, stedelijkheid en partij keuze. Wellicht maak ik daar nog wat minder keuzes van. 
+![Pagina 1](docs/paginahoofd.png)
 
-![Pagina 2](docs/pagina3.png)
 
 *Belangrijkste kenmerken:*
  - on click (op landen Europa, verschijnt correcte barchart/scatterplot)
- - on hoover, tooltip (barchart/scatterplot geeft exacte percentages of variabele)
+ - on hoover, tooltip (barchart/linegraph geeft exacte percentages of variabele)
 
 *Optioneel:*
 
