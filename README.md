@@ -23,12 +23,12 @@ De visualisatie zal laten zien hoe het met het vertrouwen in Nederland gesteld i
 ![Startpagina](docs/pagina1.jpg)
 
 - De eerste pagina laat de **landkaart van Europa** zien, de kleuren van de landen verwijzen naar het vertrouwen in de medemens van dat land. Er kan gekozen worden uit data van **drie verschillende jaren** om dit te visualiseren. Wanneer iemand op een land klikt, komt er een **linechart** tevoorschijn die de gegevens van dat land laat zien over een periode van 7 jaar.
-- Gebruikte dataset: *dataset Europa*.
-- Linked views: *kies jaartal voor kaart Europa - klik op kaart - verschijnen linechart.*
+  - Gebruikte dataset: *dataset Europa*.
+  - Linked views: *kies jaartal voor kaart Europa - klik op kaart - verschijnen linechart.*
 
 - De tweede pagina, waar men kan komen via **een menu** boven aan de site, laat de data van Nederland zien in een **horizontale barchart**. De precieze data kan gekozen worden via een **dropdown button**, naar gender of opleidingsniveau. Vervolgens verschijnen er drie linechart, die de gegevens weergeven van vertrouwen in politie, vertrouwen in EU, vertrouwen in medemens en vertrouwen in de NAVO.
-- Gebruikte dataset: *dataset Nederland*.
-- Linked views: *kies geslacht/onderwijs niveau - verschijnen linechart*
+  - Gebruikte dataset: *dataset Nederland*.
+  - Linked views: *kies geslacht/onderwijs niveau - verschijnen linechart*
 
 
 ![Pagina 1](docs/paginahoofd.png)
