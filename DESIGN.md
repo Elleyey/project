@@ -22,7 +22,7 @@ existing of three possible choices: Europe, Netherlands, Story.
 
 PAGE ONE (Dataset CBS, Europe 2002-2017):
 
-1. *Map of Europe*
+1. **Map of Europe**
       Coloured by faith in humanity.
       A *slide bar* will give possibility to chose for certain year.
     Needed:
@@ -30,7 +30,7 @@ PAGE ONE (Dataset CBS, Europe 2002-2017):
     - dropdown button (slide)  
     - D3 tooltip
 
-2. *Linechart*
+2. **Linechart**
       Wil give linechart by years, of *cliked country*, shows development of faith
       in different areas.
     Needed:
@@ -39,19 +39,19 @@ PAGE ONE (Dataset CBS, Europe 2002-2017):
 
 PAGE TWO (Dataset CBS, Netherlands 2012-2017 and Dataset CBS, Netherlands misdaad 1999 - 2017):
 
-3. *Horizontal Barchart*
+3. **Horizontal Barchart**
       Shows the total values of trust in the Netherland of different variables,
       2012 versus 2017.
     Needed:
     - D3 barchart
     - D3 tooltip
 
-4. *Line Chart*
+4. **Line Chart**
       Shows the registered crime rates from 1999 to 2016.
     Needed:
     - D3 linechart
 
-5. *Scatterplot*
+5. **Scatterplot**
       Shows (*choice by user: trust in humanity, policts, police, europe*) versus
       home burglary.
     Needed:
@@ -59,7 +59,7 @@ PAGE TWO (Dataset CBS, Netherlands 2012-2017 and Dataset CBS, Netherlands misdaa
     - Dropdown (possible to choose one)
     - D3 tooltip
 
-6. *Linechart*
+6. **Linechart**
       Shows crimerates in the Netherlands by the years, user can pick lines shown.
       Always shows feeling of safety, user can pick (*crime in power, vandalism, violence*).
       Shows one or more lines.
@@ -67,9 +67,8 @@ PAGE TWO (Dataset CBS, Netherlands 2012-2017 and Dataset CBS, Netherlands misdaa
     - D3 Linechart
     - dropdown button (possible to choose more)
 
-7. *Optional scatterplot*
+7. **Optional scatterplot**
       User can pick both axis, y-axis (trust in humanity, police, EU) x-axis (crime in power, vandalism, violence). Scatterplot shows different years in the Netherlands.
     Needed:
     - D3 Scatterplot
     - D3 Dropdown (choose one)
-    
