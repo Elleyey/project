@@ -42,16 +42,16 @@ existing of three possible choices: Europe, Netherlands, Story.
     - D3 linechart
 
 
-**LINK slidebar year WITH Map AND barchart**
+*LINK slidebar year WITH Map AND barchart*
 
 Default setting: 2002. Map changes colour by chosen year by user. Connect map ID with 'land'. Filter data by 'perioden' and give 'land' the value of 'Andere mensen'.
 
-**LINK county WITH barchart**
+*LINK county WITH barchart*
 
 If clicked on a country, filter data by ID of clicked country. Give right data to barchart.
 
 
-###PAGE TWO (Dataset CBS, Netherlands 2012-2017 and Dataset CBS, Netherlands misdaad 1999 - 2017):
+### PAGE TWO (Dataset CBS, Netherlands 2012-2017 and Dataset CBS, Netherlands misdaad 1999 - 2017):
 
 3. **Horizontal Barchart**
       Shows the total values of trust in the Netherland of different variables,
