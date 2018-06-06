@@ -20,7 +20,7 @@
 There will be **six** visualizations. On top of the site there is a menu,
 existing of three possible choices: Europe, Netherlands, Story.
 
-###PAGE ONE (Dataset CBS, Europe 2002-2017):
+### PAGE ONE (Dataset CBS, Europe 2002-2017):
 
 1. **Map of Europe**
     Coloured by faith in humanity.
@@ -42,13 +42,11 @@ existing of three possible choices: Europe, Netherlands, Story.
     - D3 linechart
 
 
-*LINK slidebar year WITH Map AND barchart*
+>*LINK slidebar year WITH Map AND barchart.*
+>Default setting: 2002. Map changes colour by chosen year by user. Connect map ID with 'land'. Filter data by 'perioden' and give 'land' the value of 'Andere mensen'.
 
-Default setting: 2002. Map changes colour by chosen year by user. Connect map ID with 'land'. Filter data by 'perioden' and give 'land' the value of 'Andere mensen'.
-
-*LINK county WITH barchart*
-
-If clicked on a country, filter data by ID of clicked country. Give right data to barchart.
+>*LINK county WITH barchart.*
+>If clicked on a country, filter data by ID of clicked country. Give right data to barchart.
 
 
 ### PAGE TWO (Dataset CBS, Netherlands 2012-2017 and Dataset CBS, Netherlands misdaad 1999 - 2017):
@@ -58,14 +56,21 @@ If clicked on a country, filter data by ID of clicked country. Give right data t
       2012 versus 2017.
 
     Needed:
+    - Dataset CBS, Netherlands 2012 - 2017
     - D3 barchart
     - D3 tooltip
+    
+    > Make a static barchart, using the data from 2012 and 2017. Show all variables in trust in a horizontal barchart. X-axis is percentage of trust, y-axis is variables of trust. 
 
 4. **Line Chart**
       Shows the registered crime rates from 1999 to 2016.
 
     Needed:
+    - Dataset CBS, Netherlands misdaad 1999 - 2017
     - D3 linechart
+
+    
+    > Make a static barchart, using the data from CBS crime rates. Y-axis shows numbers, x-axis shows years. 
 
 5. **Scatterplot**
       Shows (*choice by user: trust in humanity, policts, police, europe*) versus
@@ -75,6 +80,9 @@ If clicked on a country, filter data by ID of clicked country. Give right data t
     - D3 scatterplot
     - Dropdown (possible to choose one)
     - D3 tooltip
+    
+    > LINK choice by user WITH barchart. User choice on y-axis (trust), home buglery rates on x-axis. Years in dots. 
+    > FILTER data by user choice on id. 
 
 6. **Linechart**
       Shows crimerates in the Netherlands by the years, user can pick lines shown.
@@ -83,4 +91,7 @@ If clicked on a country, filter data by ID of clicked country. Give right data t
 
     Needed:
     - D3 Linechart
-    - dropdown button (possible to choose more)
+    - bootstrap button (possible to choose more)
+    
+    > LINK choice by user WITH linechart. User choice of user as line. One line is always showing: feeling of safety. Other lines are possible (show one if user checks one box, two if two boxes, three if three boxes). 
+    > FILTER data by user choice on id. 
