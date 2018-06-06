@@ -20,6 +20,10 @@
 There will be **six** visualizations. On top of the site there is a menu,
 existing of three possible choices: Europe, Netherlands, Story.
 
+
+![design](docs/design.png)
+
+
 ### PAGE ONE (Dataset CBS, Europe 2002-2017):
 
 1. **Map of Europe**
