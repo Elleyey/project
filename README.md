@@ -46,6 +46,7 @@ De visualisatie zal laten zien hoe het met het vertrouwen in Nederland gesteld i
 
 **Data:**
 [CBS, Nederland 2006 - 2012](https://opendata.cbs.nl/statline/#/CBS/nl/dataset/71719NED/table?dl=8CA2), [CBS, Nederland 2012-2017](http://statline.cbs.nl/Statweb/publication/?VW=T&DM=SLNL&PA=82378ned), [CBS, Europa 2010 -2012](https://opendata.cbs.nl/statline/#/CBS/nl/dataset/80518NED/table?ts=1528103408258), [CBS, Europa 2002-2012](http://statline.cbs.nl/StatWeb/publication/?VW=T&DM=SLNL&PA=80518ned&D1=0-7&D2=0&D3=a&D4=a&HD=100816-1530&HDR=T&STB=G1,G2,G3). Beschikbaar in JSON, CSV en API.
+[CBS, Nederland woninginbraak 2010-2017](http://statline.cbs.nl/Statweb/publication/?DM=SLNL&PA=83651NED&D1=0&D2=0&D3=14&D4=0&D5=a&HDR=G4%2cG3%2cG1%2cT&STB=G2&VW=D), [CBS, Geregistreerde misdaad 1999-2016 (1 variabele)](https://opendata.cbs.nl/statline/#/CBS/nl/dataset/83723NED/table?ts=1528275910601), [CBS, misdaad 1999-2017 (geweld, vandalisme, vermogen)](https://opendata.cbs.nl/statline/#/CBS/nl/dataset/81573NED/table?ts=1528276081236)
 
 **External Components:**
    - d3
