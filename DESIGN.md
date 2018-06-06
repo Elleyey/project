@@ -2,7 +2,7 @@
 
 ## Data Sources:
 
-- [CBS, Europa Vertrouwen 2002-2012](http://statline.cbs.nl/StatWeb/publication/?VW=T&DM=SLNL&PA=80518ned&D1=0-7&D2=0&D3=a&D4=a&HD=100816-1530&HDR=T&STB=G1,G2,G3) CSV
+- [CBS, Europa Vertrouwen 2002-2014](http://statline.cbs.nl/StatWeb/publication/?VW=T&DM=SLNL&PA=80518ned&D1=0-7&D2=0&D3=a&D4=a&HD=100816-1530&HDR=T&STB=G1,G2,G3) CSV
 
 - [CBS, Nederland Vertrouwen 2006 - 2012](https://opendata.cbs.nl/statline/#/CBS/nl/dataset/71719NED/table?dl=8CA2) CSV/JSON
 
@@ -20,40 +20,57 @@
 There will be **six** visualizations. On top of the site there is a menu,
 existing of three possible choices: Europe, Netherlands, Story.
 
-PAGE ONE (Dataset CBS, Europe 2002-2017):
+###PAGE ONE (Dataset CBS, Europe 2002-2017):
 
 1. **Map of Europe**
-      Coloured by faith in humanity.
-      A *slide bar* will give possibility to chose for certain year.
+    Coloured by faith in humanity.
+    A *slide bar* will give possibility to chose for certain year.
+
     Needed:
+    - Dataset Europa Vertrouwen 2002-2014
     - D3 datamaps
     - dropdown button (slide)  
     - D3 tooltip
 
-2. **Linechart**
+2. **Barchart**
       Wil give linechart by years, of *cliked country*, shows development of faith
       in different areas.
+
     Needed:
+    - Dataset Europa Vertrouwen 2002 - 2014
     - D3 on click
     - D3 linechart
 
-PAGE TWO (Dataset CBS, Netherlands 2012-2017 and Dataset CBS, Netherlands misdaad 1999 - 2017):
+
+**LINK slidebar year WITH Map AND barchart**
+
+Default setting: 2002. Map changes colour by chosen year by user. Connect map ID with 'land'. Filter data by 'perioden' and give 'land' the value of 'Andere mensen'.
+
+**LINK county WITH barchart**
+
+If clicked on a country, filter data by ID of clicked country. Give right data to barchart.
+
+
+###PAGE TWO (Dataset CBS, Netherlands 2012-2017 and Dataset CBS, Netherlands misdaad 1999 - 2017):
 
 3. **Horizontal Barchart**
       Shows the total values of trust in the Netherland of different variables,
       2012 versus 2017.
+
     Needed:
     - D3 barchart
     - D3 tooltip
 
 4. **Line Chart**
       Shows the registered crime rates from 1999 to 2016.
+
     Needed:
     - D3 linechart
 
 5. **Scatterplot**
       Shows (*choice by user: trust in humanity, policts, police, europe*) versus
       home burglary.
+
     Needed:
     - D3 scatterplot
     - Dropdown (possible to choose one)
@@ -63,12 +80,7 @@ PAGE TWO (Dataset CBS, Netherlands 2012-2017 and Dataset CBS, Netherlands misdaa
       Shows crimerates in the Netherlands by the years, user can pick lines shown.
       Always shows feeling of safety, user can pick (*crime in power, vandalism, violence*).
       Shows one or more lines.
+
     Needed:
     - D3 Linechart
     - dropdown button (possible to choose more)
-
-7. **Optional scatterplot**
-      User can pick both axis, y-axis (trust in humanity, police, EU) x-axis (crime in power, vandalism, violence). Scatterplot shows different years in the Netherlands.
-    Needed:
-    - D3 Scatterplot
-    - D3 Dropdown (choose one)
