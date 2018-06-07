@@ -31,7 +31,7 @@ De visualisatie zal laten zien hoe het met het vertrouwen in Nederland gesteld i
   - Linked views: *kies geslacht/onderwijs niveau - verschijnen linechart*
 
 
-![Pagina 1](docs/paginahoofd.png)
+![Pagina 1](docs/design.png)
 
 
 *Belangrijkste kenmerken:*
