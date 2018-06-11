@@ -1,0 +1,12 @@
+
+/* Style for Custom Tooltip*/
+div.tooltip {
+ 	position: absolute;
+	text-align: left;
+	width: 60px;
+	height: 28px;
+	padding: 2px;
+	font: 12px calibri;
+	color: navy;
+	pointer-events: auto;
+}
