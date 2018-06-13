@@ -14,3 +14,12 @@ Thus: [2008 {Belgium {trust in humanity: 5, trust in police: 6}}]
 OR [Belgium {2008: {....}} {2010: {...}}]
 
 Questions to ask: how to get data Europe in right structure? how to get data dataNetherlands as response?
+
+# day 7
+
+Got data in right format, now trying to get it working.
+
+# day 8
+
+Working on map, trying to get legend on right spot. Buggy (as in it is showing twice, do not know why).
+Also: tooltip in map is not working if added class through stylesheet (why?).
