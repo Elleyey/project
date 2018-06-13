@@ -1,18 +1,3 @@
-function giveMapColor(n) {
-
-  if (n < 3) {
-    return "red"
-  }
-  if (n > 3 && n < 6) {
-    return "orange"
-  }
-  if (n > 6 && n < 9) {
-    return "green"
-  }
-  if (n > 9) {
-    return "blue"
-  }
-}
 
 window.onload = function() {
 
@@ -21,97 +6,24 @@ window.onload = function() {
     .awaitAll(getData);
 
     function getData(error, response) {
-
+      console.log(response);
        var dataEurope = response[0]["All_data"];
        if (error) throw error;
-       var countriesLength = 203;
-       var dataArray = [];
-       var obj = {};
-       console.log(dataEurope);
 
-       // iterate over data, add the right data to a certain country
-       for (var i = 0; i < countriesLength; i++)
-       {
-         var countryName = dataEurope[i].Country;
-         var year = dataEurope[i].Year;
-         var trustHumanity = dataEurope[i].Humanity;
-         var fillKey = giveMapColor(trustHumanity);
-         var trustEuropeanParliament = dataEurope[i]["European Parliament"];
-         var trustJustice = dataEurope[i]["Justice system"];
-         var trustParliament = dataEurope[i].Parliament;
-         var trustPolice = dataEurope[i].Police;
-         var trustParties = dataEurope[i]["Political Parties"];
-         var trustPoliticians = dataEurope[i].Politicians;
-         var trustUN = dataEurope[i].UN;
-         var countryISOlist = { "Belgie" : "BEL",
-                                "Bulgarije" : "BGR",
-                                "Cyprus" : "CYP",
-                                "Denemarken" : "DNK",
-                                "Duitsland" : "DEU",
-                                "Estland" : "EST",
-                                "Finland" : "FIN",
-                                "Frankrijk" : "FRA",
-                                "Griekenland" : "GRC",
-                                "Hongarije" : "HUN",
-                                "Ierland" : "IRL",
-                                "Ijsland" : "ISL",
-                                "Italie" : "ITA",
-                                "Kosovo" : "XKX",
-                                "Kroatie" : "HRV",
-                                "Litouwen" : "LTU",
-                                "Nederland" : "NLD",
-                                "Noorwegen" : "NOR",
-                                "Oekraine" : "UKR",
-                                "Oostenrijk" : "AUT",
-                                "Polen" : "POL",
-                                "Portugal" : "PRT",
-                                "Slovenie" : "SVN",
-                                "Slowakije" : "SVK",
-                                "Spanje" : "ESP",
-                                "Tsjechie" : "CZE",
-                                "Verenigd Koninkrijk" : "GBR",
-                                "Zweden" : "SWE",
-                                "Zwitserland" : "CHE"
-                              };
-          // put the data in dataArray
-          dataArray.push(
-            { 
-              countryISO: countryISOlist[countryName],
-              year: year,
-              trustHumanity: trustHumanity,
-              trustParliament: trustParliament,
-              trustJustice: trustJustice,
-              trustEuropeanParliament: trustEuropeanParliament,
-              trustPolice: trustPolice,
-              trustParties: trustParties,
-              trustPoliticians: trustPoliticians,
-              trustUN: trustUN,
-              fillKey: fillKey
-            });
-          //
-          // obj[countryISOlist[countryName]] =
-          // {"2002" : {}, "2014*" : {}};
-          // obj[countryISOlist[countryName]][year] = {
-          //   trust: trustHumanity,
-          //   fillKey: giveMapColor(trustHumanity)
-          // }
-        // closes for loop
-      }
-      console.log(dataArray);
-      console.log(obj);
-        // closes getData
-        makeMap();
+      filterMap(dataEurope);
+
+      // closes getData
       }
 
-    function makeMap(dataArray) {
-
+    function makeMap(dataMap) {
+      console.log(dataMap);
         var map = new Datamap({
           element: document.getElementById("container"),
           scope:'world',
           setProjection: function(element){
             var projection = d3.geo.equirectangular()
                                 .center([10, 50])
-                                .rotate([4.4, 0])
+                                .rotate([5, 0])
                                 .scale(350)
                                 .translate([element.offsetWidth / 2, element.offsetHeight / 2]);
             var path = d3.geo.path()
@@ -119,25 +31,81 @@ window.onload = function() {
             return {path: path, projection: projection};
           },
           fills: {
-            defaultFill: 'rgb(255, 192, 203)',
-            'red':'rgb(255, 0, 0)',
-            'orange': 'rgb(255, 127, 80)',
-            'green': 'rgb(152, 251, 152)',
-            'blue': '	rgb(171, 167, 254)',
+            defaultFill: 'rgb(238, 233, 233)',
+            'none':'rgb(238, 233, 233)',
+            '<2':'rgb(250, 128, 114)',
+            '2-4':'rgb(255, 165, 0)',
+            '4-6':'rgb(255, 255, 102)',
+            '6-8':'rgb(173, 255, 47)',
+            '8-10':'rgb(50, 205, 50)'
           },
-          data: dataArray,
+          data: dataMap,
           // set tooltip
           geographyConfig: {
-                 // highlightOnHover: false,
+                 highlightOnHover: false,
                  popupTemplate: function(geo, data) {
-                   highlightBar(geo.id, data);
-                   return ['<div class="tooltip"><strong>',
+                   return ['<strong>',
                              'Trust in humanity in ' + geo.properties.name,
-                             ': ' + data.trust,
-                             '</strong></div>'].join('');
+                             ': ' + data.humanity,
+                             '</strong>'].join('');
                  }
                }
               });
+              // set legend
+              map.legend();
+    }
+
+    function filterMap(data) {
+      var variables = ['2002', '2004', '2006', '2008', '2010', '2012', '2014'];
+
+      var select = d3.select("body").append('select')
+                      .attr('class', 'select')
+                      .on('change', onChange);
+
+      var options = select
+                    .selectAll('option')
+                    .data(variables)
+                    .enter()
+                    .append('option')
+                    .text(function (d) {
+                      return d;
+                    });
+
+          function onChange() {
+            var selectedYear = d3.select('select').property('value')
+            d3.select('body').selectAll('svg').remove()
+
+            if ('2002' == selectedYear)
+            {
+              dataYear = data["2002"];
+            }
+            if ('2004' == selectedYear)
+            {
+             dataYear = data["2004"];
+            }
+            if ('2006' == selectedYear)
+            {
+             dataYear = data["2006"];
+            }
+            if ('2008' == selectedYear)
+            {
+             dataYear = data["2008"];
+            }
+            if ('2010' == selectedYear)
+            {
+             dataYear = data["2010"];
+            }
+            if ('2012' == selectedYear)
+            {
+             dataYear = data["2012"];
+            }
+            if ('2014' == selectedYear)
+            {
+             dataYear = data["2014*"];
+            }
+
+          makeMap(dataYear);
+          }
     }
 
 // close window onload
