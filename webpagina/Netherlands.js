@@ -11,6 +11,8 @@ window.onload = function() {
        if (error) throw error;
        var dataArrayInbraak = [];
        var dataArrayNL =[];
+       console.log(dataInbraak);
+       console.log(dataNetherlands)
 
       // iterate over data, add the right data to a certain country
       for (var i = 0; i < 8; i++)
@@ -42,7 +44,7 @@ window.onload = function() {
 
         dataArrayNL.push(
           {
-            year: year,
+            //year: year,
             bank: bank,
             church: church,
             civilServant: civilServant,
@@ -56,14 +58,14 @@ window.onload = function() {
           });
       // close second for loop
       }
-      console.log(dataArrayNL);
-      console.log(dataArrayInbraak);
       makeBar(dataArrayNL);
       makeLines(dataArrayInbraak);
       // close getData function
-      }
+    }
 
     function makeBar(data){
+      console.log(data);
+
       // set width and height of chart, of svg, set margins etc.
       var width = 400;
       var height = 200;
@@ -73,8 +75,9 @@ window.onload = function() {
       var maxValue = 100;
       var numberVariables = 10;
 
+
       // make the SVG
-      var svg = d3.select("body")
+      var svg = d3.select("#container-bar")
                   .append("svg")
                   .attr("width", width + widthMargin)
                   .attr("height", height + (2 * heightMargin))
@@ -106,29 +109,47 @@ window.onload = function() {
                     .orient("bottom")
                     .ticks(10);
 
+      console.log(Object.keys(data[0]));
+
+      var temp = Object.keys(data[0]);
+      console.log(temp);
+
       var yAxis = d3.svg.axis()
                     .scale(y)
                     .orient("left")
-                    .ticks(numberVariables);
+                    .ticks(numberVariables)
+                    .tickFormat(function(d) {
+                        return temp[d];
+                      });
 
-        var data2012 = data["0"];
-        console.log(data2012);
-        console.log(data2012.keys());
+      // var data2012 = data["0"];
+      // console.log(data2012);
+      // dataArray = ["Bank", "Church", "Civil Servant", "Companies", "Europe",
+      //               "Humanity", "Justice", "Parliament", "Police", "Press"];
+      // dataBar = [];
+      // dataBar.push(data2012.bank, data2012.church, data2012.civilServant, data2012.companies,
+      //             data2012.europe, data2012.humanity, data2012.justice, data2012.parliament,
+      //             data2012.police, data2012.press);
+      //
+      // console.log(dataArray);
+      // console.log(dataBar);
+
+
       // create SVG barchart
       svg.selectAll(".bar")
-          .data(data)
+          .data(Object.keys(data[0]))
           .enter()
           .append("rect")
           .attr("class", "bar")
-          .attr("y", function (d, i) {
-            return y(d.police);
+          .attr("y", function (d) {
+            return x(+data[0][d]);
           })
           .attr("x", 0)
           .attr("height", width / numberVariables - barPadding)
           .attr("width", function(d){
-            console.log(d);
-            return x(+d);
-          });
+            return x(+data[0][d]);
+          })
+          .attr("fill", "#2ca25f");
 
       // create X axis
       svg.append("g")
@@ -170,7 +191,7 @@ window.onload = function() {
             }
 
     function makeLines(data){
-      
+
     }
 // close onload function
 }

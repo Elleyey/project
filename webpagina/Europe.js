@@ -8,8 +8,10 @@ window.onload = function() {
     function getData(error, response) {
       console.log(response);
       var dataEurope = response[0]["All_data"];
+      var dataDefault = dataEurope["2002"];
       if (error) throw error;
       filterMap(dataEurope);
+      makeMap(dataDefault);
       // closes getData
       }
 
@@ -62,21 +64,21 @@ window.onload = function() {
            dataYear = data["2014*"];
           }
 
-        makeMap(dataYear);
-        //makeBars(dataYear);
-        }
+          makeMap(dataYear);
+          makeBars(dataYear);
+          }
       };
 
     function makeMap(dataMap) {
       console.log(dataMap);
         var map = new Datamap({
-          element: document.getElementById("container"),
+          element: document.getElementById("container-map"),
           scope:'world',
           setProjection: function(element){
             var projection = d3.geo.equirectangular()
-                                .center([5, 50])
+                                .center([10, 50])
                                 .rotate([4.4, 0])
-                                .scale(350)
+                                .scale(450)
                                 .translate([element.offsetWidth / 2, element.offsetHeight / 2]);
             var path = d3.geo.path()
                           .projection(projection);
@@ -101,22 +103,38 @@ window.onload = function() {
                  }
                },
           done: function(datamap) {
-                datamap.svg
-                .selectAll('datamaps-subunit')
-                .on('click', function(d){
-                  makeBars(dataMap);
-                });
-          }
+            datamap.svg
+            .selectAll('.datamaps-subunit')
+            .on('click', function(geography) {
+
+            var myObj = JSON.parse(this.dataset.info);
+            var countryCode = myObj.country;
+
+            data = {"country": myObj.country, "data":
+                    [{"topic": "European Parliament", "percentage": myObj.europeanParliament},
+                    {"topic": "​Humanity", "percentage": myObj.humanity},
+                    {"topic": "Justice System", "percentage": myObj.justiceSystem},
+                    {"topic": "Paliament", "percentage": myObj.parliament},
+                    {"topic": "Police", "percentage": myObj.police},
+                    {"topic": "Politicians", "percentage": myObj.politicians},
+                    {"topic": "United Nations", "percentage": myObj.un}]};
+
+            makeBars(data);
+       });
+      }
         });
+
+
         // set legend -DOES IT TWICE?
         map.legend();
 
       // close make map
       };
 
-    function makeBars(dataMap) {
+    function makeBars(data) {
 
-      console.log(dataMap);
+      d3.select("#container-bar").selectAll("svg")
+        .remove();
 
       var width = 300;
       var height = 200;
@@ -124,9 +142,11 @@ window.onload = function() {
       var heightMargin = 75;
       var widthMargin = 50;
       var maxValue = 10;
-      var variables = 8;
+      var variables = 6;
 
-      var svg = d3.select("container")
+      var countryData = data.data;
+
+      var svg = d3.select("#container-bar")
                   .append("svg")
                   .attr("width", width + widthMargin)
                   .attr("height", height + (2 * heightMargin))
@@ -142,6 +162,8 @@ window.onload = function() {
                 .domain([0, maxValue])
                 .range([0, height]);
 
+      console.log(countryData)
+
       // scale axis to make sure bars start at the bottom
       var axisScale = d3.scale.linear()
                         .domain([0, maxValue])
@@ -151,9 +173,10 @@ window.onload = function() {
       var xAxis = d3.svg.axis()
                     .scale(x)
                     .orient("bottom")
-                    .ticks(variables)
-                    .tickFormat(function(d, i) {
-                       return d;
+                    .ticks(7)
+                    .tickFormat(function(d) {
+                      console.log(d);
+                       return countryData[d].topic;
                      });
 
       // set y axis according to axisScale
@@ -164,23 +187,22 @@ window.onload = function() {
 
       // create SVG Barchart
       svg.selectAll(".bar")
-           .data(dataMap)
+           .data(countryData)
            .enter()
            .append("rect")
            .attr("class", "bar")
-           // .attr("id", function(d){
-           //   return d;
-           // })
            .attr("x", function(d, i) {
              return i * (width / variables) + widthMargin;
            })
-           .attr("y", function (d){
-             return height + heightMargin - y(5);
+           .attr("y", function (d, i){
+             return height + heightMargin - y(d.percentage);
            })
-           .attr("width", width / countriesLength - barPadding)
+           .attr("width", width / variables - barPadding)
            .attr("height", function(d) {
-             return y(4);
-           });
+             return y(d.percentage);
+           })
+           .attr("fill", "blue")
+           .transition();
 
         // create X axis
         svg.append("g")
@@ -209,9 +231,7 @@ window.onload = function() {
               .style("font-size", "12px")
               .style("font-family", "calibri")
               .style("font-weight", "bold")
-              .text( function (d) {
-                "yolo"
-              });
+              .text("text");
 
           // append xAxis title
           svg.append("text")
@@ -220,7 +240,7 @@ window.onload = function() {
                 .style("font-weight", "bold")
                 .style("font-family", "calibri")
                 .style("text-anchor", "middle")
-                .text("Countries in South America");
+                .text("this works");
 
       };
 

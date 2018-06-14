@@ -45,3 +45,27 @@ div.tooltip {
 	color: navy;
 	pointer-events: auto;
 }
+
+/* Style h1 and h2*/
+h1
+{
+	font: 18px calibri;
+	font-weight: bold;
+	text-align: center;
+}
+
+h2
+{
+	font: 14px calibri;
+	text-align: center;
+}
+
+/* Set positions of map, bar, text and button */
+#container-map {
+	float: left;
+
+}
+
+#container-bar {
+	float: right;
+}
