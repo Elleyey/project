@@ -20,7 +20,7 @@ De visualisatie zal laten zien hoe het met het vertrouwen in Nederland gesteld i
 
 - een referentie naar het bekende 'touwtje in de deur' om op de website te komen. Misschien zet ik hiet nog wat achtergrond informatie neer.
 
-![Startpagina](docs/pagina1.jpg)
+![Startpagina](doc/pagina1.jpg)
 
 - De eerste pagina laat de **landkaart van Europa** zien, de kleuren van de landen verwijzen naar het vertrouwen in de medemens van dat land. Er kan gekozen worden uit data van **zeven verschillende jaren** om dit te visualiseren. Wanneer iemand op een land klikt, komt er een **barchart** tevoorschijn die de gegevens van dat land laat zien van het eerder via slidebar gekozen jaar.
   - Gebruikte dataset: *dataset Europa*.
@@ -32,7 +32,7 @@ De visualisatie zal laten zien hoe het met het vertrouwen in Nederland gesteld i
   - Linked views: *kies geslacht/onderwijs niveau - verschijnen linechart*
 
 
-![Pagina 1](docs/design.png)
+![Pagina 1](doc/design.png)
 
 
 *Belangrijkste kenmerken:*

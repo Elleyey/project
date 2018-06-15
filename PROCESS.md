@@ -23,3 +23,13 @@ Got data in right format, now trying to get it working.
 
 Working on map, trying to get legend on right spot. Buggy (as in it is showing twice, do not know why).
 Also: tooltip in map is not working if added class through stylesheet (why?).
+
+# day 9
+
+page of Europe is working, but style not yet. Also I am missing a link between years and updating the barchart.
+
+![processOne](doc/process1.jpeg)
+
+page Netherlands needs some attention - just barchart for one year working right now. Script for line chart but is not working.
+
+![processTwo](doc/process2.jpeg)

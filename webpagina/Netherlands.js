@@ -67,10 +67,10 @@ window.onload = function() {
       console.log(data);
 
       // set width and height of chart, of svg, set margins etc.
-      var width = 400;
+      var width = 300;
       var height = 200;
       var barPadding = 4;
-      var heightMargin = 50;
+      var heightMargin = 75;
       var widthMargin = 50;
       var maxValue = 100;
       var numberVariables = 10;
@@ -96,44 +96,36 @@ window.onload = function() {
 
       // define scales
       var x = d3.scale.linear()
-                      .domain([0, maxValue])
+                      .domain([0, numberVariables])
                       .range([widthMargin, width + widthMargin]);
 
       var y = d3.scale.linear()
-                      .domain([0, numberVariables])
-                      .range([height, 0]);
+                      .domain([0, maxValue])
+                      .range([0, height]);
 
-      // set axis
-      var xAxis = d3.svg.axis()
-                    .scale(x)
-                    .orient("bottom")
-                    .ticks(10);
+      var axisScale = d3.scale.linear()
+                        .domain([0, maxValue])
+                        .range([height, 0]);
 
       console.log(Object.keys(data[0]));
 
       var temp = Object.keys(data[0]);
       console.log(temp);
 
+      // set axis
+      var xAxis = d3.svg.axis()
+                    .scale(x)
+                    .orient("bottom")
+                    .ticks(10)
+                    .tickFormat(function (d) {
+                      return temp[d];
+                    });
+
+
+
       var yAxis = d3.svg.axis()
-                    .scale(y)
-                    .orient("left")
-                    .ticks(numberVariables)
-                    .tickFormat(function(d) {
-                        return temp[d];
-                      });
-
-      // var data2012 = data["0"];
-      // console.log(data2012);
-      // dataArray = ["Bank", "Church", "Civil Servant", "Companies", "Europe",
-      //               "Humanity", "Justice", "Parliament", "Police", "Press"];
-      // dataBar = [];
-      // dataBar.push(data2012.bank, data2012.church, data2012.civilServant, data2012.companies,
-      //             data2012.europe, data2012.humanity, data2012.justice, data2012.parliament,
-      //             data2012.police, data2012.press);
-      //
-      // console.log(dataArray);
-      // console.log(dataBar);
-
+                    .scale(axisScale)
+                    .orient("left");
 
       // create SVG barchart
       svg.selectAll(".bar")
@@ -141,13 +133,15 @@ window.onload = function() {
           .enter()
           .append("rect")
           .attr("class", "bar")
-          .attr("y", function (d) {
-            return x(+data[0][d]);
+          .attr("x", function (d, i){
+            return i * (width / numberVariables) + widthMargin;
           })
-          .attr("x", 0)
-          .attr("height", width / numberVariables - barPadding)
-          .attr("width", function(d){
-            return x(+data[0][d]);
+          .attr("y", function (d, i) {
+            return height + heightMargin - y(+data[0][d]);
+          })
+          .attr("width", width / numberVariables - barPadding)
+          .attr("height", function(d){
+            return y(+data[0][d]);
           })
           .attr("fill", "#2ca25f");
 
@@ -191,6 +185,61 @@ window.onload = function() {
             }
 
     function makeLines(data){
+      console.log(data);
+
+      var margin = {top: 30, right: 20, bottom: 30, left: 50},
+      width = 600 - margin.left - margin.right,
+      height = 270 - margin.top - margin.bottom;
+
+
+      var x = d3.time.scale()
+              .domain([2010, 2017])
+              .range([0, width]);
+
+      var y = d3.scale.linear()
+                      .domain([40000, 100000])
+                      .range([0, height]);
+
+
+      var xAxis = d3.svg.axis()
+                    .scale(x)
+                    .orient("bottom")
+                    .ticks("8");
+
+      var yAxis = d3.svg.axis()
+                    .scale(y)
+                    .orient("left")
+                    .ticks("6");
+
+      var valueLine = d3.svg.line()
+                        .x(function(d) {
+                          console.log(d.year);
+                          x(d.year);
+                        })
+                        .y(function(d) {
+                          console.log(+d.burglaryRate);
+                          y(+d.burglaryRate);
+                        });
+
+     var svg = d3.select("#container-line")
+                  .append("svg")
+                  .attr("width", width + margin.left + margin.right)
+                  .attr("height", height + margin.top + margin.bottom)
+                  .append("g")
+                  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    svg.append("path")
+        .attr("class", "line")
+        .attr("d", valueLine(data));
+
+    svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis);
+
+    svg.append("g")
+        .attr("class", "y axis")
+        .call (yAxis);
 
     }
 // close onload function

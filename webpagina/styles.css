@@ -19,6 +19,7 @@ div.tooltip {
 .axis line {
     fill: none;
     stroke: black;
+		stroke-width: 1;
     shape-rendering: crispEdges;
 }
 
