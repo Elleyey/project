@@ -30,6 +30,7 @@ page of Europe is working, but style not yet. Also I am missing a link between y
 
 ![processOne](doc/process2.jpeg)
 
-page Netherlands needs some attention - just barchart for one year working right now. Script for line chart but is not working.
+page Netherlands needs some attention. Still need to make scatterplot and second linegraph.
+IDEA: maybe make new CSS for Netherlands
 
 ![processTwo](doc/process1.jpg)

@@ -70,3 +70,9 @@ h2
 #container-bar {
 	float: right;
 }
+
+path {
+    stroke: steelblue;
+    stroke-width: 2;
+    fill: none;
+}

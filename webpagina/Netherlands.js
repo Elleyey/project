@@ -17,8 +17,8 @@ window.onload = function() {
       // iterate over data, add the right data to a certain country
       for (var i = 0; i < 8; i++)
       {
-        var year = dataInbraak[i].Year;
-        var burglaryRate = dataInbraak[i].Burglary;
+        var year = Number(dataInbraak[i].Year);
+        var burglaryRate = Number(dataInbraak[i].Burglary);
 
       dataArrayInbraak.push(
         {
@@ -186,39 +186,48 @@ window.onload = function() {
 
     function makeLines(data){
       console.log(data);
+      // http://bl.ocks.org/d3noob/b3ff6ae1c120eea654b5
+      // got code inspiration from above.
 
       var margin = {top: 30, right: 20, bottom: 30, left: 50},
-      width = 600 - margin.left - margin.right,
-      height = 270 - margin.top - margin.bottom;
+      width = 350 - margin.left - margin.right,
+      height = 300 - margin.top - margin.bottom;
 
 
-      var x = d3.time.scale()
+      var x = d3.scale.linear()
               .domain([2010, 2017])
               .range([0, width]);
 
+
+
       var y = d3.scale.linear()
-                      .domain([40000, 100000])
+                      .domain([100000, 40000])
                       .range([0, height]);
 
 
+      var years = ["2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017"]
       var xAxis = d3.svg.axis()
                     .scale(x)
                     .orient("bottom")
-                    .ticks("8");
+                    // .ticks("7")
+                    .tickFormat(function (d, i) {
+                      return years[i];
+                    });
 
       var yAxis = d3.svg.axis()
                     .scale(y)
                     .orient("left")
                     .ticks("6");
 
+
       var valueLine = d3.svg.line()
                         .x(function(d) {
                           console.log(d.year);
-                          x(d.year);
+                          return x(d.year);
                         })
                         .y(function(d) {
-                          console.log(+d.burglaryRate);
-                          y(+d.burglaryRate);
+                          console.log(d.burglaryRate);
+                           return y(+d.burglaryRate);
                         });
 
      var svg = d3.select("#container-line")
