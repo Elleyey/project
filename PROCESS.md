@@ -34,3 +34,10 @@ page Netherlands needs some attention. Still need to make scatterplot and second
 IDEA: maybe make new CSS for Netherlands
 
 ![processTwo](doc/process1.jpg)
+
+# day 10 (17-6-2018)
+
+worked on multi line graph today. Data structure not right yet, also in doubt which statistics
+should be showing (one from 1950 till now, missing feeling of safety OR one from 1999 to now (missing 2010 and 2011) including feeling of safety). Also dat structure not yet right, but working. 
+
+![processSunday](doc/176.png)

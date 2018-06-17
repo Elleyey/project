@@ -3,16 +3,68 @@ window.onload = function() {
   queue()
     .defer(d3.json, 'Inbraak.json')
     .defer(d3.json, 'Netherlands.json')
+    .defer(d3.json, 'crimeRates.json')
+    .defer(d3.json, 'crimeRatesTotals.json')
     .awaitAll(getData);
 
     function getData(error, response) {
        var dataInbraak = response[0].All_data;
        var dataNetherlands = response[1].All_data;
+       var dataCrime = response[2].value;
+       var dataCrimeTotal = response[3].value;
+
+       console.log(dataCrimeTotal);
+
        if (error) throw error;
        var dataArrayInbraak = [];
        var dataArrayNL =[];
-       console.log(dataInbraak);
-       console.log(dataNetherlands)
+       var dataArrayVictim = [];
+       var dataArrayCrimeTotal = [];
+
+       // iterate over data, add the right data to a certain country
+       for (var i = 0; i < 70; i++)
+       {
+         var year = dataCrimeTotal[i].Perioden;
+         var violenceCrime = Number(dataCrimeTotal[i].Geweldsmisdrijven_8);
+         var totalCrime = Number(dataCrimeTotal[i].MisdrijvenTotaal_7);
+         var capitalCrime = Number(dataCrimeTotal[i].Vermogensmisdrijven_9);
+         var vandalismCrime = Number(dataCrimeTotal[i].VernielingenMisdrOpenbOrdeGezag_10);
+
+       dataArrayCrimeTotal.push(
+         {
+           year: Number(year.slice(0, 4)),
+           violenceCrime: violenceCrime,
+           totalCrime: totalCrime,
+           capitalCrime: capitalCrime,
+           vandalismCrime: vandalismCrime
+         });
+       // sluit for loop
+       }
+
+       console.log(dataArrayCrimeTotal);
+
+       // iterate over data, add the right data to a certain country
+       for (var i = 0; i < 19; i++)
+       {
+         var year = dataCrime[i].Perioden;
+         var feelingUnsafety = Number(dataCrime[i].Onveiligheidsgevoelens_57)
+         // var victimMurder = Number(dataCrime[i].SlachtoffersVanMoordEnDoodslag_58);
+         // var victimViolence = Number(dataCrime[i].SlachtofferschapGeweldsdelicten_54);
+         // var victimCapital = Number(dataCrime[i].SlachtofferschapVanVermogensdelicten_56);
+         // var victimVandalism = Number(dataCrime[i].SlachtofferschapVandalismedelicten_55);
+
+       dataArrayVictim.push(
+         {
+           year: Number(year.slice(0,4)),
+           feelingUnsafety: feelingUnsafety,
+           // victimMurder: victimMurder,
+           // victimViolence: victimViolence,
+           // victimCapital: victimCapital,
+           // victimVandalism: victimVandalism
+         });
+       // sluit for loop
+       }
+
 
       // iterate over data, add the right data to a certain country
       for (var i = 0; i < 8; i++)
@@ -59,12 +111,12 @@ window.onload = function() {
       // close second for loop
       }
       makeBar(dataArrayNL);
-      makeLines(dataArrayInbraak);
+      makeLine(dataArrayInbraak);
+      makeMultiLine(dataArrayVictim, dataArrayCrimeTotal);
       // close getData function
     }
 
     function makeBar(data){
-      console.log(data);
 
       // set width and height of chart, of svg, set margins etc.
       var width = 300;
@@ -107,10 +159,7 @@ window.onload = function() {
                         .domain([0, maxValue])
                         .range([height, 0]);
 
-      console.log(Object.keys(data[0]));
-
       var temp = Object.keys(data[0]);
-      console.log(temp);
 
       // set axis
       var xAxis = d3.svg.axis()
@@ -184,8 +233,7 @@ window.onload = function() {
               // close makeBar
             }
 
-    function makeLines(data){
-      console.log(data);
+    function makeLine(data){
       // http://bl.ocks.org/d3noob/b3ff6ae1c120eea654b5
       // got code inspiration from above.
 
@@ -197,8 +245,6 @@ window.onload = function() {
       var x = d3.scale.linear()
               .domain([2010, 2017])
               .range([0, width]);
-
-
 
       var y = d3.scale.linear()
                       .domain([100000, 40000])
@@ -222,33 +268,138 @@ window.onload = function() {
 
       var valueLine = d3.svg.line()
                         .x(function(d) {
-                          console.log(d.year);
                           return x(d.year);
                         })
                         .y(function(d) {
-                          console.log(d.burglaryRate);
                            return y(+d.burglaryRate);
                         });
 
-     var svg = d3.select("#container-line")
-                  .append("svg")
-                  .attr("width", width + margin.left + margin.right)
-                  .attr("height", height + margin.top + margin.bottom)
-                  .append("g")
-                  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+         var svg = d3.select("#container-line")
+                      .append("svg")
+                      .attr("width", width + margin.left + margin.right)
+                      .attr("height", height + margin.top + margin.bottom)
+                      .append("g")
+                      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    svg.append("path")
-        .attr("class", "line")
-        .attr("d", valueLine(data));
+        svg.append("path")
+            .attr("class", "line")
+            .attr("d", valueLine(data));
 
-    svg.append("g")
-        .attr("class", "x axis")
-        .attr("transform", "translate(0," + height + ")")
-        .call(xAxis);
+        svg.append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
 
-    svg.append("g")
-        .attr("class", "y axis")
-        .call (yAxis);
+        svg.append("g")
+            .attr("class", "y axis")
+            .call (yAxis);
+
+        }
+
+    function makeMultiLine(dataVictim, dataCrime){
+
+      var margin = {top: 30, right: 20, bottom: 30, left: 50},
+      width = 350 - margin.left - margin.right,
+      height = 300 - margin.top - margin.bottom;
+
+      var x = d3.scale.linear()
+              .domain([1948, 2017])
+              .range([0, width]);
+
+      var y = d3.scale.linear()
+                      .domain([100, 0])
+                      .range([0, height]);
+
+      var xAxis = d3.svg.axis()
+                    .scale(x)
+                    .orient("bottom")
+                    // .ticks("7")
+                    .tickFormat(function (d) {
+                      return d.year;
+                    });
+
+      var yAxis = d3.svg.axis()
+                    .scale(y)
+                    .orient("left")
+                    .ticks("10");
+
+
+      var lineOne = d3.svg.line()
+                        .x(function(d) {
+                          return x(d.year);
+                        })
+                        .y(function(d) {
+                           return y(+d.victimCapital);
+                        });
+
+      var lineTwo = d3.svg.line()
+                      .x(function (d) {
+                        return x(d.year);
+                      })
+                      .y(function (d) {
+                        return y(+d.capitalCrime);
+                      });
+
+      var lineThree = d3.svg.line()
+                      .x(function (d) {
+                        return x(d.year);
+                      })
+                      .y(function (d) {
+                        return y(+d.totalCrime);
+                      });
+
+        var lineFour= d3.svg.line()
+                        .x(function (d) {
+                          return x(d.year);
+                        })
+                        .y(function (d) {
+                          return y(+d.vandalismCrime);
+                        });
+
+        var lineFive= d3.svg.line()
+                        .x(function (d) {
+                          return x(d.year);
+                        })
+                        .y(function (d) {
+                          return y(+d.violenceCrime);
+                        });
+
+
+         var svg = d3.select("#container-line-multi")
+                      .append("svg")
+                      .attr("width", width + margin.left + margin.right)
+                      .attr("height", height + margin.top + margin.bottom)
+                      .append("g")
+                      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+        svg.append("path")
+            .attr("class", "line")
+            .attr("d", lineOne(dataVictim));
+
+        svg.append("path")
+            .attr("class", "line")
+            .attr("d", lineTwo(dataCrime));
+
+        svg.append("path")
+            .attr("class", "line")
+            .attr("d", lineThree(dataCrime));
+
+        svg.append("path")
+            .attr("class", "line")
+            .attr("d", lineFour(dataCrime));
+
+        svg.append("path")
+            .attr("class", "line")
+            .attr("d", lineFive(dataCrime));
+
+        svg.append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
+
+        svg.append("g")
+            .attr("class", "y axis")
+            .call (yAxis);
 
     }
 // close onload function
