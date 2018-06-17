@@ -38,6 +38,20 @@ IDEA: maybe make new CSS for Netherlands
 # day 10 (17-6-2018)
 
 worked on multi line graph today. Data structure not right yet, also in doubt which statistics
-should be showing (one from 1950 till now, missing feeling of safety OR one from 1999 to now (missing 2010 and 2011) including feeling of safety). Also dat structure not yet right, but working. 
+should be showing (one from 1950 till now, missing feeling of safety OR one from 1999 to now (missing 2010 and 2011) including feeling of safety). Also dat structure not yet right, but working.
 
 ![processSunday](doc/176.png)
+
+tried to make the scatter aswell - only to realize that six years is
+not a lot... Also saw that I have been using some wrong data for the charts (line graph should have been crime rate in total, not burglaryRate). And should try to make scatterplot with two different datasets, not sure if possible (did not work so well when I tried):
+
+![processSunday](doc/176(2).png)
+
+So on MONDAY (& rest of week):
+- decide on charts
+- decide on which data for which charts
+- try to make horizontal barchart with data of 2012 AND 2017
+- try to make check boxes for crime rates multi line chart
+- try to make scatterplot interactive
+- try to add extra linked view to page 1
+- try to make it look nice
