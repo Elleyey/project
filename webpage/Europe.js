@@ -9,9 +9,11 @@ window.onload = function() {
       console.log(response);
       var dataEurope = response[0]["All_data"];
       var dataDefault = dataEurope["2002"];
+      var dataDefaultBar = dataEurope["2002"]["NLD"];
       if (error) throw error;
       filterMap(dataEurope);
       makeMap(dataDefault);
+      makeBars(dataDefaultBar);
       // closes getData
       }
 
@@ -132,7 +134,7 @@ window.onload = function() {
       };
 
     function makeBars(data) {
-
+      console.log(data);
       d3.select("#container-bar").selectAll("svg")
         .remove();
 
@@ -161,8 +163,6 @@ window.onload = function() {
       var y = d3.scale.linear()
                 .domain([0, maxValue])
                 .range([0, height]);
-
-      console.log(countryData)
 
       // scale axis to make sure bars start at the bottom
       var axisScale = d3.scale.linear()

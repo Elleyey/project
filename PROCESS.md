@@ -55,3 +55,11 @@ So on MONDAY (& rest of week):
 - try to make scatterplot interactive
 - try to add extra linked view to page 1
 - try to make it look nice
+
+# day 11 (18-6)
+
+Adjusted the idea of the scatterplot after Stand Ups. They advised to use the data set of the
+Netherlands and build on this one to make an interactive chart. I tried to do that and it worked, as shown in the second picture. I also adjested the axes of the other two figures.
+Happy with the progress I made today! :)
+![processSunday](doc/186.png)
+![processSunday](doc/186(2).png)
