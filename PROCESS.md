@@ -67,3 +67,11 @@ after click on specific bar:
 
 ![processSunday](doc/186(2).png)
 
+# day 12 (19-6)
+
+had a funeral today so was not there.
+
+# day 13 (20-6)
+
+tried to fix the barchart on the page Europe today, so it stays and updates with the year given. Still need to make an if statement. Difficulty is that to make a barchart, data is needed in a different format than for the map - they cannot communicatie otherwise. Or make an update function instead of deleting every time?
+Now possible to change country, change year (but always getting Belgium).

@@ -9,11 +9,10 @@ window.onload = function() {
       console.log(response);
       var dataEurope = response[0]["All_data"];
       var dataDefault = dataEurope["2002"];
-      var dataDefaultBar = dataEurope["2002"]["NLD"];
+
       if (error) throw error;
       filterMap(dataEurope);
       makeMap(dataDefault);
-      makeBars(dataDefaultBar);
       // closes getData
       }
 
@@ -67,7 +66,6 @@ window.onload = function() {
           }
 
           makeMap(dataYear);
-          makeBars(dataYear);
           }
       };
 
@@ -137,6 +135,7 @@ window.onload = function() {
       console.log(data);
       d3.select("#container-bar").selectAll("svg")
         .remove();
+
 
       var width = 300;
       var height = 200;
