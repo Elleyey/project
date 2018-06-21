@@ -19,7 +19,7 @@ window.onload = function() {
     function filterMap(data) {
       var variables = ['2002', '2004', '2006', '2008', '2010', '2012', '2014'];
 
-      var select = d3.select("body").append('select')
+      var select = d3.select("#years-button").append('select')
                       .attr('class', 'select')
                       .on('change', onChange);
 
@@ -66,6 +66,7 @@ window.onload = function() {
           }
 
           makeMap(dataYear);
+          makeBars(dataYear);
           }
       };
 
@@ -74,6 +75,8 @@ window.onload = function() {
         var map = new Datamap({
           element: document.getElementById("container-map"),
           scope:'world',
+          height: 350,
+          width: 450,
           setProjection: function(element){
             var projection = d3.geo.equirectangular()
                                 .center([10, 50])
@@ -121,12 +124,15 @@ window.onload = function() {
 
             makeBars(data);
        });
+
+
       }
+
         });
 
 
         // set legend -DOES IT TWICE?
-        map.legend();
+          map.legend();
 
       // close make map
       };
@@ -136,110 +142,70 @@ window.onload = function() {
       d3.select("#container-bar").selectAll("svg")
         .remove();
 
+        var countryData = data.data;
 
-      var width = 300;
-      var height = 200;
-      var barPadding = 4;
-      var heightMargin = 75;
-      var widthMargin = 50;
-      var maxValue = 10;
-      var variables = 6;
+        margin = { top: 15, right: 25, bottom: 20, left: 100 },
+        width = 350 - margin.left - margin.right,
+        height = 300 - margin.top - margin.bottom;
 
-      var countryData = data.data;
-
-      var svg = d3.select("#container-bar")
+        var svg = d3.select("#container-bar")
                   .append("svg")
-                  .attr("width", width + widthMargin)
-                  .attr("height", height + (2 * heightMargin))
-                  .append("g");
-
-      // make x scale
-      var x = d3.scale.linear()
-                    .domain([0, variables])
-                    .range([widthMargin, width + widthMargin]);
+                  .attr("width", width + margin.left + margin.right)
+                  .attr("height", height + margin.top + margin.bottom)
+                  .append("g")
+                  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
       // make y scale
-      var y = d3.scale.linear()
-                .domain([0, maxValue])
-                .range([0, height]);
+      var x = d3.scale.linear()
+                .range([0, width])
+                .domain([0, 10]);
 
-      // scale axis to make sure bars start at the bottom
-      var axisScale = d3.scale.linear()
-                        .domain([0, maxValue])
-                        .range([height, 0]);
+      // make x scale
+      var y = d3.scale.ordinal()
+                .rangeRoundBands([height, 0], .1)
+                .domain(countryData.map(function (d) {
+                  return d.topic;
+                }));
+
+      // set y axis according to axisScale
+      var yAxis = d3.svg.axis()
+                    .scale(y)
+                    .orient("left");
 
       // set x axis according to xScale
       var xAxis = d3.svg.axis()
                     .scale(x)
                     .orient("bottom")
-                    .ticks(7)
-                    .tickFormat(function(d) {
-                      console.log(d);
-                       return countryData[d].topic;
-                     });
-
-      // set y axis according to axisScale
-      var yAxis = d3.svg.axis()
-                    .scale(axisScale)
-                    .orient("left")
                     .ticks(10);
 
+      // create Y axis
+      svg.append("g")
+          .attr("class", "axis")
+          .call(yAxis);
+
       // create SVG Barchart
-      svg.selectAll(".bar")
-           .data(countryData)
-           .enter()
-           .append("rect")
+      var bars = svg.selectAll(".bar")
+                     .data(countryData)
+                     .enter()
+                     .append("g");
+
+      bars.append("rect")
            .attr("class", "bar")
-           .attr("x", function(d, i) {
-             return i * (width / variables) + widthMargin;
+           .attr("y", function (d){
+              return y(d.topic);
            })
-           .attr("y", function (d, i){
-             return height + heightMargin - y(d.percentage);
+           .attr("height", y.rangeBand())
+           .attr("x", 0)
+           .attr("width", function(d) {
+             return x(d.percentage);
            })
-           .attr("width", width / variables - barPadding)
-           .attr("height", function(d) {
-             return y(d.percentage);
-           })
-           .attr("fill", "blue")
-           .transition();
+           .attr("fill", "pink");
 
         // create X axis
         svg.append("g")
             .attr("class","axis")
-            .attr("transform", "translate(0," + (height + heightMargin) + ")")
-            .call(xAxis)
-            .selectAll("text")
-            .style("text-anchor", "end")
-            .attr("transform", "rotate(-50)");
-
-        // create Y axis
-        svg.append("g")
-            .attr("class", "axis")
-            .attr("transform", "translate(" + widthMargin + "," +
-                   heightMargin + ")")
-            .call(yAxis);
-
-
-        // append yAxis title
-        svg.append("text")
-              .attr("transform", "rotate(-90)")
-              .attr("y", 7)
-              .attr("x", - 170)
-              .attr("dy", "1em")
-              .style("text-anchor", "middle")
-              .style("font-size", "12px")
-              .style("font-family", "calibri")
-              .style("font-weight", "bold")
-              .text("text");
-
-          // append xAxis title
-          svg.append("text")
-                .attr("transform", "translate(" + (width / 2) + "," + (height + 145) + ")")
-                .style("font-size", "12px")
-                .style("font-weight", "bold")
-                .style("font-family", "calibri")
-                .style("text-anchor", "middle")
-                .text("this works");
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
 
       };
 

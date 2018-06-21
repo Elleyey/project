@@ -75,3 +75,24 @@ had a funeral today so was not there.
 
 tried to fix the barchart on the page Europe today, so it stays and updates with the year given. Still need to make an if statement. Difficulty is that to make a barchart, data is needed in a different format than for the map - they cannot communicatie otherwise. Or make an update function instead of deleting every time?
 Now possible to change country, change year (but always getting Belgium).
+
+# day 14 (21-6)
+Need to do today:
+
+PAGE NL:
+
+- CHECK make check boxes multi-line
+- (maybe tonight) possible make button to change years in barchart netherlands
+
+![processWednesday](doc/216).png)
+
+PAGE EU:
+
+- CHECK (but still something wrong with transform/translate I think and does not work when years are changed,
+  this did work before so not sure when it broke) fix barchart!!!
+
+![processWednesday](doc/216(2)).png)
+
+BOTH:
+
+- WORKING ON IT fix looks, html

@@ -62,14 +62,14 @@ h2
 }
 
 /* Set positions of map, bar, text and button */
-#container-map {
+/* #container-map {
 	float: left;
 
 }
 
 #container-bar {
 	float: right;
-}
+} */
 
 path {
     stroke: steelblue;

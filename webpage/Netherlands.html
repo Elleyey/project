@@ -36,17 +36,18 @@
         </div>
       </div>
     </nav>
-    <div id="container1">
-      <h1>bar</h1>
-      <div id="container-bar" style="position: relative; width: 500px; height: 400px;">
-      </div>
-      <h1>line</h1>
-      <div id="container-line" style="position: relative; width: 350px; height: 300px">
-      </div>
-      <div id="container-line-multi" style="position: relative; width: 350px; height: 300px">
-      </div>
-      <div id="container-scatter" style="position: relative; width: 800; height: 800px">
-      </div>
-    </div>
+      <svg id="container-bar" width ="500" height="400" style="position: absolute; left: 30px; top: 50px;">
+      </svg>
+      <svg id="container-line" width="350" height="300" style="position: absolute; left: 630px; top: 50px">
+      </svg>
+      <div style="position: absolute; left: 120px; top: 430px">
+      <form>
+      Capital Crime: <input type="checkbox" checked id="lineTwoCheck" onclick="hideLineTwo();">
+      Vandalism: <input type="checkbox" checked id="LineThreeCheck" onclick="hideLineThree();">
+      Violence: <input type="checkbox" checked id="LineFourCheck" onclick="hideLineFour();">
+    </form>
+  </div>
+      <svg id="container-line-multi" width="500" height="300" style="position: absolute; left: 30px; top: 450px" >
+    </svg>
   </body>
 </html>
