@@ -158,16 +158,16 @@ window.onload = function() {
                   .attr("id", "nederlandVertrouwen");
 
 
-      // tooltip for barchart
-      // var tip = d3.tip()
-      //             .attr("class", "d3-tip")
-      //             .offset([-20, 0])
-      //             .html(function (d, i) {
-      //               return "<strong>tip working</strong>"
-      //             })
-      //
-      // // show tooltip
-      // svg.call(tip);
+      //  tooltip for barchart
+      var tip = d3.tip()
+                  .attr("class", "d3-tip")
+                  .offset([-20, 0])
+                  .html(function (d, i) {
+                    return "click to see line"
+                  });
+
+      // show tooltip
+      svg.call(tip);
 
       // define scales
       var x = d3.scale.linear()
@@ -219,7 +219,9 @@ window.onload = function() {
           .on("click", function (d){
             makeLineBar(d, y);
           })
-          .attr("fill", "pink");
+          .attr("fill", "pink")
+          .on("mouseover", tip.show)
+          .on("mouseout", tip.hide);
 
       // create X axis
       svg.append("g")
@@ -237,27 +239,24 @@ window.onload = function() {
                  heightMargin + ")")
           .call(yAxis);
 
-      // append yAxis title
       svg.append("text")
-            .attr("transform", "rotate(-90)")
-            .attr("y", 7)
-            .attr("x", - 170)
-            .attr("dy", "1em")
-            .style("text-anchor", "middle")
-            .style("font-size", "12px")
+          //  .attr("transform", "translate(" + (width / 2) + "," + (height + 145) + ")")
+            .attr("y", 50)
+            .attr("x", 170)
+            .style("font-size", "14px")
+          //  .style("font-weight", "bold")
             .style("font-family", "calibri")
-            .style("font-weight", "bold")
-            .text("joejoe");
+            .style("text-anchor", "middle")
+            .text("Trust in the Netherlands (2012)");
 
-        // append xAxis title
-        svg.append("text")
-              .attr("transform", "translate(" + (width / 2) + "," + (height + 145) + ")")
-              .style("font-size", "12px")
-              .style("font-weight", "bold")
-              .style("font-family", "calibri")
-              .style("text-anchor", "middle")
-              .text("variables");
-
+     svg.append("text")
+          .attr("y", 85)
+          .attr("x", 57)
+          .style("font-size", "10px")
+          //.attr("transform", "rotate(-90)")
+          .style("font-family", "calibri")
+          .style("text-anchor", "middle")
+          .text("%");
 
               // close makeBar
             }
@@ -324,11 +323,41 @@ window.onload = function() {
             .attr("class", "y axis")
             .call (yAxis);
 
+        svg.append("text")
+            //  .attr("transform", "translate(" + (width / 2) + "," + (height + 145) + ")")
+              .attr("y", - 15)
+              .attr("x", 120)
+              .style("font-size", "14px")
+            //  .style("font-weight", "bold")
+              .style("font-family", "calibri")
+              .style("text-anchor", "middle")
+              .text("Burglary rates in the Netherlands");
+
+      svg.append("text")
+          //  .attr("transform", "translate(" + (width / 2) + "," + (height + 145) + ")")
+            .attr("y", 233)
+            .attr("x", 264)
+            .style("font-size", "10px")
+          //  .style("font-weight", "bold")
+            .style("font-family", "calibri")
+            .style("text-anchor", "middle")
+            .text("years");
+
+      svg.append("text")
+            .attr("y", 10)
+            .attr("x", -20)
+            .style("font-size", "10px")
+            .attr("transform", "rotate(-90)")
+            .style("font-family", "calibri")
+            .style("text-anchor", "middle")
+            .text("quantities");
+
+
         }
 
     function makeMultiLine(dataCrime){
 
-      var margin = {top: 30, right: 20, bottom: 30, left: 50},
+      var margin = {top: 30, right: 12, bottom: 30, left: 50},
       width = 470 - margin.left - margin.right,
       height = 300 - margin.top - margin.bottom;
 
@@ -362,6 +391,32 @@ window.onload = function() {
                      .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
                      .attr("id", "nederlandMisdaad");
 
+
+      // const annotations = [
+      //   {
+      //     type: d3.annotationCalloutCircle,
+      //     note: {
+      //       label: "There is no vast explanation",
+      //       title: "Myth of decreasing crime",
+      //       wrap: 140
+      //     },
+      //     subject:{
+      //       radius: 50
+      //     },
+      //   x: 620,
+      //   y: 150,
+      //   dy: 137,
+      //   dx: 102
+      // }].map(function (d) { d.color = "#E8336D"; return d});
+      //
+      // const makeAnnotations = d3.annotation()
+      //                           .type(d3.annotationLabel)
+      //                           .annotations(annotations);
+      //
+      // d3.select("svg")
+      //   .append("g")
+      //   .attr("class", "annotation-group")
+      //   .call(makeAnnotations);
 
       var lineOne = d3.svg.line()
                       .x(function (d) {
@@ -428,6 +483,35 @@ window.onload = function() {
             .style("stroke", "light-blue")
             .attr("visibility", "visible");
 
+        svg.append("text")
+            //  .attr("transform", "translate(" + (width / 2) + "," + (height + 145) + ")")
+              .attr("y", -2)
+              .attr("x", 170)
+              .style("font-size", "14px")
+            //  .style("font-weight", "bold")
+              .style("font-family", "calibri")
+              .style("text-anchor", "middle")
+              .text("Crime in the Netherlands");
+
+          svg.append("text")
+                .attr("y", 10)
+                .attr("x", -70)
+                .style("font-size", "10px")
+                .attr("transform", "rotate(-90)")
+                .style("font-family", "calibri")
+                .style("text-anchor", "middle")
+                .text("Registered crime per 1000 citizens");
+
+          svg.append("text")
+              //  .attr("transform", "translate(" + (width / 2) + "," + (height + 145) + ")")
+                .attr("y", 235)
+                .attr("x", 370)
+                .style("font-size", "10px")
+              //  .style("font-weight", "bold")
+                .style("font-family", "calibri")
+                .style("text-anchor", "middle")
+                .text("years");
+
 
     }
 
@@ -439,7 +523,12 @@ window.onload = function() {
       d3.select("#nederlandVertrouwen").selectAll(".line")
         .remove();
 
+        console.log(selectedBar);
+
       svg = d3.select("#nederlandVertrouwen");
+
+      svg.select("#nederlandVertrouwen").select("selectedBar")
+          .style("fill", "grey");
 
       var x = d3.scale.linear()
               .domain([2012, 2017])
@@ -462,25 +551,30 @@ window.onload = function() {
                   .attr("class", "d3-tip")
                   .offset([-20, 0])
                   .html(function (d) {
-                    return "<span>" + d.year + "</span>"
+                    return "<tip-visible><span>" + d.year + "</span>"
                   });
 
+
       svg.call(tip);
+
+      svg.append("path")
+          .attr("class", "line")
+          .attr("d", valueLine(dataArrayNLLine));
 
        // Add the scatterplot
        svg.selectAll("dot")
            .data(dataArrayNLLine)
-            .enter().append("circle")
-           .attr("r", 3.5)
+            .enter()
+            .append("circle")
+           .attr("r", 5)
            .attr("cx", function(d) { return x(d.year); })
            .attr("cy", function(d) { return 275 - y(d[selectedBar]); })
            .style("fill", "blue")
            .on("mouseover", tip.show)
            .on("mouseout", tip.hide);
 
-        svg.append("path")
-            .attr("class", "line")
-            .attr("d", valueLine(dataArrayNLLine));
+
+
 
     }
 

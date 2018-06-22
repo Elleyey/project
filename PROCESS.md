@@ -96,3 +96,7 @@ PAGE EU:
 BOTH:
 
 - WORKING ON IT fix looks, html
+
+# day 15 (22-6)
+
+presentations today, added titles and info to graphs, fixed barchart.

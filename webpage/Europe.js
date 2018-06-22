@@ -65,8 +65,8 @@ window.onload = function() {
            dataYear = data["2014*"];
           }
 
-          makeMap(dataYear);
-          makeBars(dataYear);
+        makeMap(dataYear);
+        makeBars(dataYear);
           }
       };
 
@@ -122,7 +122,7 @@ window.onload = function() {
                     {"topic": "Politicians", "percentage": myObj.politicians},
                     {"topic": "United Nations", "percentage": myObj.un}]};
 
-            makeBars(data);
+                    makeBars(data);
        });
 
 
@@ -132,20 +132,23 @@ window.onload = function() {
 
 
         // set legend -DOES IT TWICE?
-          map.legend();
+          //map.legend();
 
       // close make map
       };
 
     function makeBars(data) {
+
+      console.log("in Make Bars")
       console.log(data);
+
       d3.select("#container-bar").selectAll("svg")
         .remove();
 
         var countryData = data.data;
-
-        margin = { top: 15, right: 25, bottom: 20, left: 100 },
-        width = 350 - margin.left - margin.right,
+        console.log(countryData);
+        margin = { top: 15, right: 25, bottom: 35, left: 150 },
+        width = 400 - margin.left - margin.right,
         height = 300 - margin.top - margin.bottom;
 
         var svg = d3.select("#container-bar")
@@ -155,12 +158,12 @@ window.onload = function() {
                   .append("g")
                   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-      // make y scale
+      // make x scale
       var x = d3.scale.linear()
                 .range([0, width])
                 .domain([0, 10]);
 
-      // make x scale
+      // make y scale
       var y = d3.scale.ordinal()
                 .rangeRoundBands([height, 0], .1)
                 .domain(countryData.map(function (d) {
@@ -207,7 +210,25 @@ window.onload = function() {
             .attr("transform", "translate(0," + height + ")")
             .call(xAxis);
 
-      };
+      svg.append("text")
+            .attr("y", - 18)
+            .attr("x", 100)
+            .attr("dy", "1em")
+            .style("text-anchor", "middle")
+            .style("font-size", "14px")
+            .style("font-family", "calibri")
+            .text("Trust in " + data.country);
+
+        // append xAxis title
+        svg.append("text")
+              .attr("y", 245)
+              .attr("x", 168)
+              .style("font-size", "10px")
+              .style("font-family", "calibri")
+              .style("text-anchor", "middle")
+              .text("grades given on scale 1 - 10");
+
+        };
 
 // close window onload
 }

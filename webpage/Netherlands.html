@@ -14,6 +14,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
     <!-- version 3.3 of d3 -->
     <script src="https://d3js.org/d3.v3.js"></script>
+    <!-- For use of annotation -->
+    <link href='https://fonts.googleapis.com/css?family=Lato:300,900' rel='stylesheet' type='text/css'>
     <!-- to use queue anyways -->
     <script src="https://d3js.org/queue.v1.min.js"></script>
       <script src="https://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
@@ -36,15 +38,15 @@
         </div>
       </div>
     </nav>
-      <svg id="container-bar" width ="500" height="400" style="position: absolute; left: 30px; top: 50px;">
+      <svg id="container-bar" width ="500" height="400" style="position: absolute; left: 630px; top: 100px;">
       </svg>
-      <svg id="container-line" width="350" height="300" style="position: absolute; left: 630px; top: 50px">
+      <svg id="container-line" width="350" height="300" style="position: absolute; left: 30px; top: 100px">
       </svg>
-      <div style="position: absolute; left: 120px; top: 430px">
+      <div style="position: absolute; left: 550px; top: 625px">
       <form>
-      Capital Crime: <input type="checkbox" checked id="lineTwoCheck" onclick="hideLineTwo();">
-      Vandalism: <input type="checkbox" checked id="LineThreeCheck" onclick="hideLineThree();">
-      Violence: <input type="checkbox" checked id="LineFourCheck" onclick="hideLineFour();">
+      <div><input type="checkbox" checked id="lineTwoCheck" onclick="hideLineTwo();"> Capital Crime </div>
+      <div><input type="checkbox" checked id="LineThreeCheck" onclick="hideLineThree();"> Vandalism </div>
+      <div><input type="checkbox" checked id="LineFourCheck" onclick="hideLineFour();"> Violence </div>
     </form>
   </div>
       <svg id="container-line-multi" width="500" height="300" style="position: absolute; left: 30px; top: 450px" >
