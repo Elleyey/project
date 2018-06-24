@@ -100,3 +100,9 @@ BOTH:
 # day 15 (22-6)
 
 presentations today, added titles and info to graphs, fixed barchart.
+
+# day 16 (24-6)
+
+working on code cleaning and looks of site.
+- wanted to do annotation in multiline graph, is not possible in d3v3. Chose to do a circle with tooltip to explain the decreasing of crime in NL.
+- also after feedback from friday presentations, decided to draw line in other chart. 
