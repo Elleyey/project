@@ -84,14 +84,14 @@ PAGE NL:
 - CHECK make check boxes multi-line
 - (maybe tonight) possible make button to change years in barchart netherlands
 
-![processWednesday](doc/216).png)
+![processWednesday](doc/216.png)
 
 PAGE EU:
 
 - CHECK (but still something wrong with transform/translate I think and does not work when years are changed,
   this did work before so not sure when it broke) fix barchart!!!
 
-![processWednesday](doc/216(2)).png)
+![processWednesday](doc/216(2).png)
 
 BOTH:
 
