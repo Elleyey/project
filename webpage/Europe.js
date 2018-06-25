@@ -1,3 +1,5 @@
+selectedCountry = "Netherlands";
+selectedISO = "NLD";
 
 window.onload = function() {
 
@@ -11,14 +13,15 @@ window.onload = function() {
     function getData(error, response) {
       var dataEurope = response[0]["All_data"];
       var dataDefaultMap = dataEurope["2002"];
-      var dataDefaultBar = {"country": "Netherlands", "data":
-              [{"topic": "European Parliament", "percentage": "4.7"},
-              {"topic": "​Humanity", "percentage": "5.7"},
-              {"topic": "Justice System", "percentage": "5.4"},
-              {"topic": "Paliament", "percentage": "5.2"},
-              {"topic": "Police", "percentage": "5.8"},
-              {"topic": "Politicians", "percentage": "4.9"},
-              {"topic": "United Nations", "percentage": "5.4"}]};
+      var dataDefaultBar = filterData(selectedISO, selectedCountry, dataDefaultMap);
+      // var dataDefaultBar = {"country": "Netherlands", "data":
+      //         [{"topic": "European Parliament", "percentage": "4.7"},
+      //         {"topic": "​Humanity", "percentage": "5.7"},
+      //         {"topic": "Justice System", "percentage": "5.4"},
+      //         {"topic": "Paliament", "percentage": "5.2"},
+      //         {"topic": "Police", "percentage": "5.8"},
+      //         {"topic": "Politicians", "percentage": "4.9"},
+      //         {"topic": "United Nations", "percentage": "5.4"}]};
 
 
       if (error) throw error;
@@ -28,7 +31,7 @@ window.onload = function() {
       // closes getData
       }
 
-    /* filterMap - year of map is deafault on 2002, change is done by user.
+    /* filterMap - year of map is default on 2002, change is done by user.
     This map gives year on to makeMap.
     */
     function filterMap(data) {
@@ -56,40 +59,25 @@ window.onload = function() {
 
           // get selected year
           var selectedYear = d3.select('select').property('value');
+          var dataYear;
 
-          // check which year, pass on right dataset.
-          if ('2002' == selectedYear)
-          {
-            dataYear = data["2002"];
-          }
-          if ('2004' == selectedYear)
-          {
-           dataYear = data["2004"];
-          }
-          if ('2006' == selectedYear)
-          {
-           dataYear = data["2006"];
-          }
-          if ('2008' == selectedYear)
-          {
-           dataYear = data["2008"];
-          }
-          if ('2010' == selectedYear)
-          {
-           dataYear = data["2010"];
-          }
-          if ('2012' == selectedYear)
-          {
-           dataYear = data["2012"];
-          }
+          // dataset change to delete 2014*
           if ('2014' == selectedYear)
           {
            dataYear = data["2014*"];
           }
+          else
+          {
+            dataYear = data[selectedYear];
+          }
 
+          var dataFiltered = filterData(selectedISO, selectedCountry, dataYear);
+
+          // globale variabele die geselecteeerde land bijhoud
+          // filterfunctie
           UpdateMap(dataYear);
           console.log(dataYear);
-          UpdateBars(dataYear);
+          UpdateBars(dataFiltered);
           }
      // close filterMap
      };
@@ -138,18 +126,20 @@ window.onload = function() {
                 var myObj = JSON.parse(this.dataset.info);
                 var countryCode = myObj.country;
                 var ISOCode = myObj.ISO;
+                selectedCountry = countryEnglish;
+                selectedISO = ISOCode;
 
                 // filter fillKey, Year and ISO out of used data for the barchart.
-                data = {"country": countryEnglish, "data":
-                        [{"topic": "European Parliament", "percentage": myObj.europeanParliament},
-                        {"topic": "​Humanity", "percentage": myObj.humanity},
-                        {"topic": "Justice System", "percentage": myObj.justiceSystem},
-                        {"topic": "Paliament", "percentage": myObj.parliament},
-                        {"topic": "Police", "percentage": myObj.police},
-                        {"topic": "Politicians", "percentage": myObj.politicians},
-                        {"topic": "United Nations", "percentage": myObj.un}]};
+                // data = {"country": countryEnglish, "data":
+                //         [{"topic": "European Parliament", "percentage": myObj.europeanParliament},
+                //         {"topic": "​Humanity", "percentage": myObj.humanity},
+                //         {"topic": "Justice System", "percentage": myObj.justiceSystem},
+                //         {"topic": "Paliament", "percentage": myObj.parliament},
+                //         {"topic": "Police", "percentage": myObj.police},
+                //         {"topic": "Politicians", "percentage": myObj.politicians},
+                //         {"topic": "United Nations", "percentage": myObj.un}]};
 
-                filterData(ISOCode, countryEnglish, dataMap);
+                var data = filterData(selectedISO, selectedCountry, dataMap);
                 UpdateBars(data);
 
           // close onclick function
@@ -267,6 +257,7 @@ window.onload = function() {
 
           // write title
           svg.append("text")
+                .attr("class", "title-bar-EU")
                 .attr("y", - 18)
                 .attr("x", 100)
                 .attr("dy", "1em")
@@ -322,42 +313,51 @@ function checkBucket(n){
 
 function UpdateMap(dataMap) {
   map.updateChoropleth(dataMap)
-
 }
 
 function UpdateBars(data){
 
-  var data = data.data;
+  var dataData = data.data;
+
+  console.log(data.country);
+
   svg = d3.select(".barchart-EU")
 
   var bars = d3.selectAll(".bar")
-                 .data(function() {
-                   console.log("ja")
-                   return data
-                 })
+                 .data(dataData);
 
-                 d3.selectAll(".bar")
-                      .transition()
-                      .attr("y", function (d){
-                        console.log(d)
-                         return yBar(d.topic);
-                      })
-                      .attr("height", yBar.rangeBand())
-                      .attr("x", 0)
-                      .attr("width", function(d) {
-                        return xBar(d.percentage);
-                      })
-                      .attr("fill", function(d){
-                        var n = +d.percentage;
-                        return checkBucket(n);
-                      })
+   d3.selectAll(".bar")
+        .transition()
+        .attr("y", function (d){
+          console.log(d)
+           return yBar(d.topic);
+        })
+        .attr("height", yBar.rangeBand())
+        .attr("x", 0)
+        .attr("width", function(d) {
+          return xBar(d.percentage);
+        })
+        .attr("fill", function(d){
+          var n = +d.percentage;
+          return checkBucket(n);
+        })
+
+    // re-write title
+    svg.selectAll("title-bar-EU")
+          .attr("y", - 18)
+          .attr("x", 100)
+          .attr("dy", "1em")
+          .style("text-anchor", "middle")
+          .style("font-size", "14px")
+          .style("font-family", "calibri")
+          .text("Trust in " + data.country);
 }
 
 function filterData(ISOCode, countryEnglish, dataMap){
 
   var thisData = dataMap[ISOCode];
 
-  data = {"country": countryEnglish, "data":
+  var data = {"country": countryEnglish, "data":
           [{"topic": "European Parliament", "percentage": thisData.europeanParliament},
           {"topic": "​Humanity", "percentage": thisData.humanity},
           {"topic": "Justice System", "percentage": thisData.justiceSystem},
@@ -365,4 +365,6 @@ function filterData(ISOCode, countryEnglish, dataMap){
           {"topic": "Police", "percentage": thisData.police},
           {"topic": "Politicians", "percentage": thisData.politicians},
           {"topic": "United Nations", "percentage": thisData.un}]};
+
+   return data;
 };

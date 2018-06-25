@@ -105,4 +105,9 @@ presentations today, added titles and info to graphs, fixed barchart.
 
 working on code cleaning and looks of site.
 - wanted to do annotation in multiline graph, is not possible in d3v3. Chose to do a circle with tooltip to explain the decreasing of crime in NL.
-- also after feedback from friday presentations, decided to draw line in other chart. 
+- also after feedback from friday presentations, decided to draw line in other chart.
+
+# day 17 (25-6)
+
+made update functions of map and barchart EU today, working except for title update.
+Tomorrow: clean code EU and NL / clean html
