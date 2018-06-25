@@ -10,11 +10,21 @@ window.onload = function() {
     */
     function getData(error, response) {
       var dataEurope = response[0]["All_data"];
-      var dataDefault = dataEurope["2002"];
+      var dataDefaultMap = dataEurope["2002"];
+      var dataDefaultBar = {"country": "Netherlands", "data":
+              [{"topic": "European Parliament", "percentage": "4.7"},
+              {"topic": "​Humanity", "percentage": "5.7"},
+              {"topic": "Justice System", "percentage": "5.4"},
+              {"topic": "Paliament", "percentage": "5.2"},
+              {"topic": "Police", "percentage": "5.8"},
+              {"topic": "Politicians", "percentage": "4.9"},
+              {"topic": "United Nations", "percentage": "5.4"}]};
+
 
       if (error) throw error;
       filterMap(dataEurope);
-      makeMap(dataDefault);
+      makeMap(dataDefaultMap);
+      makeBars(dataDefaultBar);
       // closes getData
       }
 
@@ -45,8 +55,7 @@ window.onload = function() {
         function onChange() {
 
           // get selected year
-          var selectedYear = d3.select('select').property('value')
-          d3.select('body').selectAll('svg').remove()
+          var selectedYear = d3.select('select').property('value');
 
           // check which year, pass on right dataset.
           if ('2002' == selectedYear)
@@ -78,17 +87,18 @@ window.onload = function() {
            dataYear = data["2014*"];
           }
 
-          makeMap(dataYear);
-          makeBars(dataYear);
+          UpdateMap(dataYear);
+          console.log(dataYear);
+          UpdateBars(dataYear);
           }
      // close filterMap
      };
 
-     /* makeMap - make data map, fill colors according to values, call makeBars*/
+    /* makeMap - make data map, fill colors according to values, call makeBars*/
     function makeMap(dataMap) {
 
         // use datamaps, zoom in on Europe
-        var map = new Datamap({
+        map = new Datamap({
           element: document.getElementById("container-map"),
           scope:'world',
           height: 350,
@@ -104,12 +114,12 @@ window.onload = function() {
             return {path: path, projection: projection};
           },
           fills: {
-            defaultFill: 'rgb(255, 255, 255)',
-            '<2':'rgb(255, 153, 255)',
-            '2-4':'rgb(255, 102, 255)',
-            '4-6':'rgb(204, 0, 204)',
-            '6-8':'rgb(153, 0, 153)',
-            '8-10':'rgb(102, 0, 102)'
+            defaultFill: 'rgb(247,252,253)',
+            '<2':'rgb(191,211,230)',
+            '2-4':'rgb(140,150,198)',
+            '4-6':'rgb(140,107,177)',
+            '6-8':'rgb(136,65,157)',
+            '8-10':'rgb(77,0,75)'
           },
           data: dataMap,
           // set tooltip
@@ -127,6 +137,7 @@ window.onload = function() {
             .on('click', function(geography) {
                 var myObj = JSON.parse(this.dataset.info);
                 var countryCode = myObj.country;
+                var ISOCode = myObj.ISO;
 
                 // filter fillKey, Year and ISO out of used data for the barchart.
                 data = {"country": countryEnglish, "data":
@@ -138,7 +149,8 @@ window.onload = function() {
                         {"topic": "Politicians", "percentage": myObj.politicians},
                         {"topic": "United Nations", "percentage": myObj.un}]};
 
-                makeBars(data);
+                filterData(ISOCode, countryEnglish, dataMap);
+                UpdateBars(data);
 
           // close onclick function
           });
@@ -164,10 +176,19 @@ window.onload = function() {
     function makeBars(data) {
 
       // remove previously drawn bars
-      d3.select("#container-bar").selectAll("svg")
-        .remove();
+      // d3.select("#container-bar").selectAll("svg")
+      //   .remove();
 
         var countryData = data.data;
+
+        //  tooltip for barchart
+        var tip = d3.tip()
+                    .attr("class", "d3-tip-bars-EU")
+                    .offset([35, 0])
+                    .html(function (d, i) {
+                      return d.percentage
+                    });
+
 
         // set margins
         margin = { top: 15, right: 25, bottom: 35, left: 150 },
@@ -175,20 +196,24 @@ window.onload = function() {
         height = 300 - margin.top - margin.bottom;
 
         // set svg margins
-        var svg = d3.select("#container-bar")
+         svg = d3.select("#container-bar")
+                  .append("class", "barchart-EU")
                   .append("svg")
                   .attr("width", width + margin.left + margin.right)
                   .attr("height", height + margin.top + margin.bottom)
                   .append("g")
                   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+        // show tooltip
+        svg.call(tip);
+
         // make x scale
-        var x = d3.scale.linear()
+       xBar = d3.scale.linear()
                   .range([0, width])
                   .domain([0, 10]);
 
         // make y scale
-        var y = d3.scale.ordinal()
+       yBar = d3.scale.ordinal()
                   .rangeRoundBands([height, 0], .1)
                   .domain(countryData.map(function (d) {
                     return d.topic;
@@ -196,12 +221,12 @@ window.onload = function() {
 
         // set y axis according to axisScale
         var yAxis = d3.svg.axis()
-                      .scale(y)
+                      .scale(yBar)
                       .orient("left");
 
         // set x axis according to xScale
         var xAxis = d3.svg.axis()
-                      .scale(x)
+                      .scale(xBar)
                       .orient("bottom")
                       .ticks(10);
 
@@ -220,14 +245,19 @@ window.onload = function() {
         bars.append("rect")
              .attr("class", "bar")
              .attr("y", function (d){
-                return y(d.topic);
+                return yBar(d.topic);
              })
-             .attr("height", y.rangeBand())
+             .attr("height", yBar.rangeBand())
              .attr("x", 0)
              .attr("width", function(d) {
-               return x(d.percentage);
+               return xBar(d.percentage);
              })
-             .attr("fill", "pink");
+             .attr("fill", function(d){
+               var n = +d.percentage;
+               return checkBucket(n);
+             })
+             .on("mouseover", tip.show)
+             .on("mouseout", tip.hide);
 
           // draw X axis
           svg.append("g")
@@ -258,3 +288,81 @@ window.onload = function() {
 
 // close window onload
 }
+
+function checkBucket(n){
+  // give specific color accordingly to percentages
+  if (n < 2) {
+    return 'rgb(247,252,253)'
+  }
+  if (n < 3) {
+    return 'rgb(224,236,244)'
+  }
+  if (n < 4) {
+    return 'rgb(191,211,230)'
+  }
+  if (n < 5) {
+    return 'rgb(158,188,218)'
+  }
+  if (n < 6) {
+    return 'rgb(140,150,198)'
+  }
+  if (n < 7){
+    return 'rgb(140,107,177)'
+  }
+  if (n < 8){
+    return 'rgb(136,65,157)'
+  }
+  if (n < 9){
+    return 'rgb(129,15,124)'
+  }
+  if (n < 10){
+    return 'rgb(77,0,75)'
+  }
+}
+
+function UpdateMap(dataMap) {
+  map.updateChoropleth(dataMap)
+
+}
+
+function UpdateBars(data){
+
+  var data = data.data;
+  svg = d3.select(".barchart-EU")
+
+  var bars = d3.selectAll(".bar")
+                 .data(function() {
+                   console.log("ja")
+                   return data
+                 })
+
+                 d3.selectAll(".bar")
+                      .transition()
+                      .attr("y", function (d){
+                        console.log(d)
+                         return yBar(d.topic);
+                      })
+                      .attr("height", yBar.rangeBand())
+                      .attr("x", 0)
+                      .attr("width", function(d) {
+                        return xBar(d.percentage);
+                      })
+                      .attr("fill", function(d){
+                        var n = +d.percentage;
+                        return checkBucket(n);
+                      })
+}
+
+function filterData(ISOCode, countryEnglish, dataMap){
+
+  var thisData = dataMap[ISOCode];
+
+  data = {"country": countryEnglish, "data":
+          [{"topic": "European Parliament", "percentage": thisData.europeanParliament},
+          {"topic": "​Humanity", "percentage": thisData.humanity},
+          {"topic": "Justice System", "percentage": thisData.justiceSystem},
+          {"topic": "Paliament", "percentage": thisData.parliament},
+          {"topic": "Police", "percentage": thisData.police},
+          {"topic": "Politicians", "percentage": thisData.politicians},
+          {"topic": "United Nations", "percentage": thisData.un}]};
+};

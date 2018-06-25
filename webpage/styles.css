@@ -29,11 +29,11 @@ div.tooltip {
 }
 
 /* Legend Position Style */
-.legend {
+/* .legend {
 	position:absolute;
 	left:500px;
 	top:200px;
-}
+} */
 
 /* Style for Custom Tooltip*/
 div.tooltip {
@@ -61,15 +61,18 @@ h2
 	text-align: center;
 }
 
-/* Set positions of map, bar, text and button */
-/* #container-map {
-	float: left;
-
+p1
+{
+	font: 14px calibri;
+	text-align: center;
 }
 
-#container-bar {
-	float: right;
-} */
+p2
+{
+	font: 12px calibri;
+	text-align: center;
+}
+
 
 path {
     stroke: steelblue;
@@ -83,4 +86,50 @@ path {
 
 .bar:hover {
   fill: grey;
+}
+
+#years-button {
+  border: 5px solid powderblue;
+  text-align: center;
+  font-size: 16px;
+}
+
+/* #container-map {
+	border: 1px solid powderblue;
+}
+
+#container-bar {
+	border: 1px solid powderblue;
+} */
+
+#container-line{
+	border: 1px solid powderblue;
+}
+
+#container-line-multi{
+	border: 1px solid powderblue;
+}
+
+#container-line-NL{
+	border: 1px solid powderblue;
+}
+
+.d3-tip-bars-EU {
+ 	position: absolute;
+	text-align: left;
+	width: 60px;
+	height: 28px;
+	padding: 2px;
+	font: 12px calibri;
+	color: white;
+	pointer-events: auto;
+}
+
+#background-black{
+	background-color: black;
+}
+
+#introduction-EU{
+	text-align: center;
+	display: inline-block;
 }

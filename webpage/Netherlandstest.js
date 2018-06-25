@@ -1,6 +1,6 @@
-var dataArrayCrimeTotal;
-var xMulti;
-var yMulti;
+// var dataArrayCrimeTotal;
+// var xMulti;
+// var yMulti;
 
 window.onload = function() {
 
@@ -306,7 +306,7 @@ window.onload = function() {
                         })
                         .interpolate("basis");
 
-         var svg = d3.select("#container-line")
+         var svg = d3.select("#container-line-NL")
                       .attr("id", "oneLine")
                       .append("svg")
                       .attr("width", width + margin.left + margin.right)
