@@ -111,3 +111,7 @@ working on code cleaning and looks of site.
 
 made update functions of map and barchart EU today, working except for title update.
 Tomorrow: clean code EU and NL / clean html
+
+# day 18 (26-6)
+
+fixed the titles today, worked on the story page and html style & did code review for Jochem.

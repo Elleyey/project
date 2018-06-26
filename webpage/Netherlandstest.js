@@ -215,7 +215,9 @@ window.onload = function() {
           .on("click", function (d){
             makeLineBar(d, y);
           })
-          .attr("fill", "pink")
+          .attr("fill", function (d) {
+            return checkBucket(+data[0][d]);
+          })
           .on("mouseover", tip.show)
           .on("mouseout", tip.hide)
           .transition()
@@ -361,9 +363,9 @@ window.onload = function() {
 
     function makeMultiLine(dataCrime){
 
-      var margin = {top: 30, right: 12, bottom: 30, left: 50},
-      width = 470 - margin.left - margin.right,
-      height = 300 - margin.top - margin.bottom;
+      var margin = {top: 40, right: 22, bottom: 40, left: 60},
+      width = 570 - margin.left - margin.right,
+      height = 400 - margin.top - margin.bottom;
 
       xMulti = d3.scale.linear()
               .domain([1948, 2017])
@@ -403,9 +405,6 @@ window.onload = function() {
                       .y(function (d) {
                         return yMulti(+d.totalCrime);
                       });
-
-
-
 
         svg.append("path")
             .attr("class", "line")
@@ -464,18 +463,6 @@ window.onload = function() {
             .style("stroke", "light-blue")
             .attr("visibility", "visible");
 
-
-        //  tooltip for barchart
-        var tip = d3.tip()
-                    .attr("class", "d3-tip")
-                    .offset([-20, 0])
-                    .html(function (d, i) {
-                      return "The Mystery of The Decreasing Crime"
-                    });
-
-        // show tooltip
-        svg.call(tip);
-
         svg.append("text")
             //  .attr("transform", "translate(" + (width / 2) + "," + (height + 145) + ")")
               .attr("y", -2)
@@ -497,24 +484,46 @@ window.onload = function() {
 
           svg.append("text")
               //  .attr("transform", "translate(" + (width / 2) + "," + (height + 145) + ")")
-                .attr("y", 235)
-                .attr("x", 370)
+                .attr("y", 315)
+                .attr("x", 470)
                 .style("font-size", "10px")
               //  .style("font-weight", "bold")
                 .style("font-family", "calibri")
                 .style("text-anchor", "middle")
                 .text("years");
 
-
             svg.selectAll("circle")
               .data([10])
               .enter().append("circle")
-              .attr("cy", 17)
-              .attr("cx", 320)
+              .attr("cy", 23)
+              .attr("cx", 380)
               .attr("r", 5)
-              .style("fill", "red")
-              .on("mouseover", tip.show)
-              .on("mouseout", tip.hide);
+              .style("fill", "red");
+
+            svg.append("text")
+                  .attr("y", 24)
+                  .attr("x", 420)
+                  .style("font-size", "10px")
+                  .style("font-family", "calibri")
+                  .style("text-anchor", "middle")
+                  .text("The Mystery of")
+                  .style("text-decoration", "underline")
+                  .on("click", function() {
+                    window.open("https://www.cbs.nl/nl-nl/achtergrond/2018/19/het-mysterie-van-de-verdwenen-criminaliteit");
+                  });
+
+            svg.append("text")
+                  .attr("y", 34)
+                  .attr("x", 445)
+                  .style("font-size", "10px")
+                  .style("font-family", "calibri")
+                  .style("text-anchor", "middle")
+                  .text("the Decreasing Crime")
+                  .style("text-decoration", "underline")
+                  .on("click", function() {
+                    window.open("https://www.cbs.nl/nl-nl/achtergrond/2018/19/het-mysterie-van-de-verdwenen-criminaliteit");
+                  });
+
 
 
     }
@@ -577,60 +586,6 @@ window.onload = function() {
 
     }
 
-    // function makeScatter(dataNL, dataIB){
-    //   console.log(dataNL);
-    //
-    //   var margin = {top: 100, right: 100, bottom: 60, left: 100},
-    //      width = 700 - margin.left - margin.right,
-    //      height = 600 - margin.top - margin.bottom;
-    //
-    //   var svg = d3.select("#container-scatter")
-    //               .append("svg")
-    //               .attr("width", width + margin.left + margin.right)
-    //               .attr("height", height + margin.top + margin.bottom)
-    //               .append("g")
-    //               .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-    //
-    //   var y = d3.scale.linear()
-    //             .domain([0, 100])
-    //             .range([height, 0]);
-    //
-    //   var x = d3.scale.linear()
-    //             .domain([0, 100])
-    //             .range([0, width]);
-    //
-    //   var xAxis = d3.svg.axis()
-    //                 .scale(x)
-    //                 .orient("bottom");
-    //
-    //
-    //   var yAxis = d3.svg.axis()
-    //                 .scale(y)
-    //                 .orient("left");
-    //
-    //
-    //   svg.selectAll(".dot")
-    //       .data(dataNL)
-    //       .enter()
-    //       .append("circle")
-    //       .attr("cx", function (d){
-    //         return x(d.bank);
-    //       })
-    //       .attr("cy", function (d){
-    //         return y(d.church);
-    //       })
-    //       .attr("r", 4);
-    //
-    //   svg.append("g")
-    //       .attr("class", "axis")
-    //       .attr("transform", "translate(0," + height + ")")
-    //       .call(xAxis);
-    //
-    //   svg.append("g")
-    //       .attr("class", "axis")
-    //       .call(yAxis);
-    //
-
 // close onload function
 }
 
@@ -667,4 +622,35 @@ function hideLineFour(){
     line.attr("visibility", "visible")
   }
 
+}
+
+function checkBucket(n){
+  // give specific color accordingly to percentages
+  if (n < 20) {
+    return 'rgb(178,24,43)'
+  }
+  if (n < 30) {
+    return 'rgb(214,96,77)'
+  }
+  if (n < 40) {
+    return 'rgb(244,165,130)'
+  }
+  if (n < 50) {
+    return 'rgb(253,219,199)'
+  }
+  if (n < 60) {
+    return 'rgb(209,229,240)'
+  }
+  if (n < 70){
+    return 'rgb(146,197,222)'
+  }
+  if (n < 80){
+    return 'rgb(67,147,195)'
+  }
+  if (n < 90){
+    return 'rgb(33,102,172)'
+  }
+  if (n < 10){
+    return 'rgb(5,48,97)'
+  }
 }

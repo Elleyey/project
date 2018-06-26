@@ -14,15 +14,6 @@ window.onload = function() {
       var dataEurope = response[0]["All_data"];
       var dataDefaultMap = dataEurope["2002"];
       var dataDefaultBar = filterData(selectedISO, selectedCountry, dataDefaultMap);
-      // var dataDefaultBar = {"country": "Netherlands", "data":
-      //         [{"topic": "European Parliament", "percentage": "4.7"},
-      //         {"topic": "​Humanity", "percentage": "5.7"},
-      //         {"topic": "Justice System", "percentage": "5.4"},
-      //         {"topic": "Paliament", "percentage": "5.2"},
-      //         {"topic": "Police", "percentage": "5.8"},
-      //         {"topic": "Politicians", "percentage": "4.9"},
-      //         {"topic": "United Nations", "percentage": "5.4"}]};
-
 
       if (error) throw error;
       filterMap(dataEurope);
@@ -73,10 +64,7 @@ window.onload = function() {
 
           var dataFiltered = filterData(selectedISO, selectedCountry, dataYear);
 
-          // globale variabele die geselecteeerde land bijhoud
-          // filterfunctie
           UpdateMap(dataYear);
-          console.log(dataYear);
           UpdateBars(dataFiltered);
           }
      // close filterMap
@@ -102,12 +90,12 @@ window.onload = function() {
             return {path: path, projection: projection};
           },
           fills: {
-            defaultFill: 'rgb(247,252,253)',
-            '<2':'rgb(191,211,230)',
-            '2-4':'rgb(140,150,198)',
-            '4-6':'rgb(140,107,177)',
-            '6-8':'rgb(136,65,157)',
-            '8-10':'rgb(77,0,75)'
+            defaultFill: 'rgb(247,247,247)',
+            '<2':'rgb(178,24,43)',
+            '2-4':'rgb(239,138,98)',
+            '4-6':'rgb(209,229,240)',
+            '6-8':'rgb(103,169,207)',
+            '8-10':'rgb(33,102,172)'
           },
           data: dataMap,
           // set tooltip
@@ -128,16 +116,6 @@ window.onload = function() {
                 var ISOCode = myObj.ISO;
                 selectedCountry = countryEnglish;
                 selectedISO = ISOCode;
-
-                // filter fillKey, Year and ISO out of used data for the barchart.
-                // data = {"country": countryEnglish, "data":
-                //         [{"topic": "European Parliament", "percentage": myObj.europeanParliament},
-                //         {"topic": "​Humanity", "percentage": myObj.humanity},
-                //         {"topic": "Justice System", "percentage": myObj.justiceSystem},
-                //         {"topic": "Paliament", "percentage": myObj.parliament},
-                //         {"topic": "Police", "percentage": myObj.police},
-                //         {"topic": "Politicians", "percentage": myObj.politicians},
-                //         {"topic": "United Nations", "percentage": myObj.un}]};
 
                 var data = filterData(selectedISO, selectedCountry, dataMap);
                 UpdateBars(data);
@@ -164,10 +142,6 @@ window.onload = function() {
 
     /* makeBars - make bars according to chosen year and country*/
     function makeBars(data) {
-
-      // remove previously drawn bars
-      // d3.select("#container-bar").selectAll("svg")
-      //   .remove();
 
         var countryData = data.data;
 
@@ -264,7 +238,7 @@ window.onload = function() {
                 .style("text-anchor", "middle")
                 .style("font-size", "14px")
                 .style("font-family", "calibri")
-                .text("Trust in " + data.country);
+                .text("Trust in " + selectedCountry);
 
             // append xAxis title
             svg.append("text")
@@ -283,31 +257,31 @@ window.onload = function() {
 function checkBucket(n){
   // give specific color accordingly to percentages
   if (n < 2) {
-    return 'rgb(247,252,253)'
+    return 'rgb(178,24,43)'
   }
   if (n < 3) {
-    return 'rgb(224,236,244)'
+    return 'rgb(214,96,77)'
   }
   if (n < 4) {
-    return 'rgb(191,211,230)'
+    return 'rgb(244,165,130)'
   }
   if (n < 5) {
-    return 'rgb(158,188,218)'
+    return 'rgb(253,219,199)'
   }
   if (n < 6) {
-    return 'rgb(140,150,198)'
+    return 'rgb(209,229,240)'
   }
   if (n < 7){
-    return 'rgb(140,107,177)'
+    return 'rgb(146,197,222)'
   }
   if (n < 8){
-    return 'rgb(136,65,157)'
+    return 'rgb(67,147,195)'
   }
   if (n < 9){
-    return 'rgb(129,15,124)'
+    return 'rgb(33,102,172)'
   }
   if (n < 10){
-    return 'rgb(77,0,75)'
+    return 'rgb(5,48,97)'
   }
 }
 
@@ -319,8 +293,6 @@ function UpdateBars(data){
 
   var dataData = data.data;
 
-  console.log(data.country);
-
   svg = d3.select(".barchart-EU")
 
   var bars = d3.selectAll(".bar")
@@ -329,7 +301,6 @@ function UpdateBars(data){
    d3.selectAll(".bar")
         .transition()
         .attr("y", function (d){
-          console.log(d)
            return yBar(d.topic);
         })
         .attr("height", yBar.rangeBand())
@@ -343,7 +314,7 @@ function UpdateBars(data){
         })
 
     // re-write title
-    svg.selectAll("title-bar-EU")
+    d3.select(".title-bar-EU")
           .attr("y", - 18)
           .attr("x", 100)
           .attr("dy", "1em")
@@ -351,6 +322,8 @@ function UpdateBars(data){
           .style("font-size", "14px")
           .style("font-family", "calibri")
           .text("Trust in " + data.country);
+
+          console.log(data.country)
 }
 
 function filterData(ISOCode, countryEnglish, dataMap){
