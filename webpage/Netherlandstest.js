@@ -148,6 +148,7 @@ window.onload = function() {
       var maxValue = 100;
       var numberVariables = 10;
 
+      var temp = Object.keys(data[0]);
 
       // make the SVG
       var svg = d3.select("#container-bar")
@@ -160,10 +161,9 @@ window.onload = function() {
 
       //  tooltip for barchart
       var tip = d3.tip()
-                  .attr("class", "d3-tip")
-                  .offset([-20, 0])
-                  .html(function (d, i) {
-                    return "click to see line"
+                  .attr("class", "tooltipBarNL")
+                  .html(function (d) {
+                    return +data[0][d] + "%";
                   });
 
       // show tooltip
@@ -183,7 +183,7 @@ window.onload = function() {
                         .domain([0, maxValue])
                         .range([height, 0]);
 
-      var temp = Object.keys(data[0]);
+
 
       // set axis
       var xAxis = d3.svg.axis()
@@ -463,15 +463,6 @@ window.onload = function() {
             .style("stroke", "light-blue")
             .attr("visibility", "visible");
 
-        svg.append("text")
-            //  .attr("transform", "translate(" + (width / 2) + "," + (height + 145) + ")")
-              .attr("y", -2)
-              .attr("x", 170)
-              .style("font-size", "14px")
-            //  .style("font-weight", "bold")
-              .style("font-family", "calibri")
-              .style("text-anchor", "middle")
-              .text("Crime in the Netherlands");
 
           svg.append("text")
                 .attr("y", 10)
@@ -555,11 +546,9 @@ window.onload = function() {
 
 
       var tip = d3.tip()
-                  .attr("class", "d3-tip")
+                  .attr("class", "tooltipLineNL")
                   .offset([-20, 0])
                   .html(function (d) {
-                    console.log(d);
-                    console.log(selectedBar);
                     return "<tip-visible><span>" + (d[selectedBar]) + "% of trust in " + selectedBar + "</span>"
                   });
 
@@ -569,7 +558,7 @@ window.onload = function() {
       svg.append("path")
           .attr("class", "lineTrust")
           .attr("d", valueLine(dataArrayNLLine))
-          .style("stroke", "pink");
+          .style("stroke", "red");
 
        // Add the scatterplot
        svg.selectAll("dot")

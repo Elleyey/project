@@ -3,7 +3,7 @@ path:hover {
 }
 
 /* Style for Custom Tooltip*/
-div.tooltip {
+/* div.tooltip {
  	position: absolute;
 	text-align: left;
 	width: 60px;
@@ -12,7 +12,28 @@ div.tooltip {
 	font: 12px calibri;
 	color: navy;
 	pointer-events: auto;
+} */
+
+/* Tooltip container */
+.tooltipBarNL {
+    position: relative;
+    display: inline-block;
+		font: 11px calibri;
 }
+
+/* Style for Custom Tooltip*/
+.tooltipLineNL {
+ 	position: absolute;
+	text-align: left;
+	width: 45px;
+	height: 63px;
+	padding: 2px;
+	font: 12px calibri;
+	color: black;
+	background: rgba(255, 255, 255, 0.9);
+	pointer-events: auto;
+}
+
 
 /* Give axis nice look */
 .axis path,
@@ -28,24 +49,8 @@ div.tooltip {
     font-size: 11px;
 }
 
-/* Legend Position Style */
-/* .legend {
-	position:absolute;
-	left:500px;
-	top:200px;
-} */
 
-/* Style for Custom Tooltip*/
-div.tooltip {
- 	position: absolute;
-	text-align: left;
-	width: 60px;
-	height: 28px;
-	padding: 2px;
-	font: 12px calibri;
-	color: navy;
-	pointer-events: auto;
-}
+
 
 /* Style h1 and h2*/
 h1
@@ -128,4 +133,13 @@ path {
 #introduction-EU{
 	text-align: center;
 	display: inline-block;
+}
+
+.title-multi-line{
+	font: 18px calibri;
+	color: red;
+	text-decoration-line: underline;
+  position: absolute;
+	left: 550px;
+	top: 455px;
 }
