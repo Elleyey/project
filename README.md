@@ -1,12 +1,12 @@
-*Link to website*: https://elleyey.github.io/project/webpage/html/index.html
+**Link to website**: https://elleyey.github.io/project/webpage/html/index.html
 
-*Application name*: The string from the mailbox - crime rates and trust.
+**Application name**: The string from the mailbox - crime rates and trust.
 
-*Screenshots and purpose of them*:
+**Screenshots and purpose of them**:
 
-*Name*: Ellemijke Donner.
+**Name**: Ellemijke Donner.
 
-*Copyright statement:* for copyright of this project see LICENSE.md.
+**Copyright statement**: for copyright of this project see LICENSE.md.
 
 - The video showing Jan Terlouw is property of DWDD - DWDD 2016.
 

@@ -35,7 +35,7 @@ IDEA: maybe make new CSS for Netherlands
 
 ![processTwo](docs/pic/process1.jpg)
 
-# day 10 (17-6-2018)
+# day 10
 
 worked on multi line graph today. Data structure not right yet, also in doubt which statistics
 should be showing (one from 1950 till now, missing feeling of safety OR one from 1999 to now (missing 2010 and 2011) including feeling of safety). Also dat structure not yet right, but working.
@@ -56,8 +56,7 @@ So on MONDAY (& rest of week):
 - try to add extra linked view to page 1
 - try to make it look nice
 
-# day 11 (18-6)
-
+# day 11
 Adjusted the idea of the scatterplot after Stand Ups. They advised to use the data set of the
 Netherlands and build on this one to make an interactive chart. I tried to do that and it worked, as shown in the second picture. I also adjested the axes of the other two figures.
 Happy with the progress I made today! :)
@@ -67,16 +66,16 @@ after click on specific bar:
 
 ![processSunday](docs/pic/186(2).png)
 
-# day 12 (19-6)
+# day 12
 
 had a funeral today so was not there.
 
-# day 13 (20-6)
+# day 13
 
 tried to fix the barchart on the page Europe today, so it stays and updates with the year given. Still need to make an if statement. Difficulty is that to make a barchart, data is needed in a different format than for the map - they cannot communicatie otherwise. Or make an update function instead of deleting every time?
 Now possible to change country, change year (but always getting Belgium).
 
-# day 14 (21-6)
+# day 14
 Need to do today:
 
 PAGE NL:
@@ -97,26 +96,26 @@ BOTH:
 
 - WORKING ON IT fix looks, html
 
-# day 15 (22-6)
+# day 15
 
 presentations today, added titles and info to graphs, fixed barchart.
 
-# day 16 (24-6)
+# day 16
 
 working on code cleaning and looks of site.
 - wanted to do annotation in multiline graph, is not possible in d3v3. Chose to do a circle with tooltip to explain the decreasing of crime in NL.
 - also after feedback from friday presentations, decided to draw line in other chart.
 
-# day 17 (25-6)
+# day 17
 
 made update functions of map and barchart EU today, working except for title update.
 Tomorrow: clean code EU and NL / clean html
 
-# day 18 (26-6)
+# day 18
 
 fixed the titles today, worked on the story page and html style & did code review for Jochem.
 
-# day 19 (27-6)
+# day 19
 
 worked on cleaning the code today, made pages, cleaned the github. Changed some styling. Not happy with the colors so far, but if need to be color blind, maybe these
-are the best. 
+are the best.
