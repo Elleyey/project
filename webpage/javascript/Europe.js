@@ -10,7 +10,7 @@ window.onload = function() {
 
   // queue before showing page
   queue()
-    .defer(d3.json, 'Europe.json')
+    .defer(d3.json, 'data/Europe.json')
     .awaitAll(getData);
 
     /* GetData to work with later, call filterMap and makeMap

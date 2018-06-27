@@ -5,7 +5,7 @@ import sys
 array = []
 counter = 0
 
-with open('Nederland2012-2017CSV.csv', 'r') as csvNL:
+with open('/data/Nederland2012-2017CSV.csv', 'r') as csvNL:
     csvReader = csv.reader(csvNL, delimiter=';')
     for row in csvReader:
         counter = counter + 1

@@ -54,7 +54,7 @@ ISOcodes = {"Belgie" : "BEL",
 "Zwitserland" : "CHE" }
 
 
-with open('EU2002-2012.csv', 'r') as csvEurope:
+with open('/data/EU2002-2012.csv', 'r') as csvEurope:
     csvReader = csv.reader(csvEurope, delimiter=';')
     for row in csvReader:
         counter = counter + 1
