@@ -7,12 +7,13 @@ Italic text is added by me.
 * Soms te algemeen. Bijv LineOne, -Two, etc.*/ Changed*
 * Er missen beschrijvingen boven de functies. */ Added*
 
-# Formatting (3) */ Made updateFunctions*
-* Op wat kleine dingen na in orde.
+# Formatting (3)
+* Op wat kleine dingen na in orde. */ Made updateFunctions*
 
-# Organization (1) */ Cleaned and changed*
+# Organization (1)
 * Nog veel code die 'uit staat'.
 * Logischer om overal functies die de data bewerken of filteren bovenaan te zetten.
+*/ Cleaned and changed*
 
 # Flow (3)
 * Voor sommige variabelen is de scope te groot.
