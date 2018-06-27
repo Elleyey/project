@@ -1,6 +1,6 @@
-// var dataArrayCrimeTotal;
-// var xMulti;
-// var yMulti;
+var dataArrayCrimeTotal;
+var xMulti;
+var yMulti;
 
 window.onload = function() {
 
@@ -57,7 +57,7 @@ window.onload = function() {
       }
       console.log(dataArrayInbraakScatter);
 
-      for (var i = 2; i < 8; i++)
+      for (var i = 0; i < 8; i++)
       {
         var year = Number(dataInbraak[i].Year);
         var burglaryRate = Number(dataInbraak[i].Burglary);
@@ -148,7 +148,6 @@ window.onload = function() {
       var maxValue = 100;
       var numberVariables = 10;
 
-      var temp = Object.keys(data[0]);
 
       // make the SVG
       var svg = d3.select("#container-bar")
@@ -161,9 +160,10 @@ window.onload = function() {
 
       //  tooltip for barchart
       var tip = d3.tip()
-                  .attr("class", "tooltipBarNL")
-                  .html(function (d) {
-                    return +data[0][d] + "%";
+                  .attr("class", "d3-tip")
+                  .offset([-20, 0])
+                  .html(function (d, i) {
+                    return "click to see line"
                   });
 
       // show tooltip
@@ -183,7 +183,7 @@ window.onload = function() {
                         .domain([0, maxValue])
                         .range([height, 0]);
 
-
+      var temp = Object.keys(data[0]);
 
       // set axis
       var xAxis = d3.svg.axis()
@@ -212,23 +212,16 @@ window.onload = function() {
           .attr("y", function (d, i) {
             return height + heightMargin - y(+data[0][d]);
           })
+          .attr("width", width / numberVariables - barPadding)
+          .attr("height", function(d){
+            return y(+data[0][d]);
+          })
           .on("click", function (d){
             makeLineBar(d, y);
           })
-          .attr("fill", function (d) {
-            return checkBucket(+data[0][d]);
-          })
+          .attr("fill", "pink")
           .on("mouseover", tip.show)
-          .on("mouseout", tip.hide)
-          .transition()
-            .delay(function (d, i) { return i* 100;})
-            .duration(100)
-            .attr("width", width / numberVariables - barPadding)
-            .attr("height", function(d){
-                return y(+data[0][d]);
-            });
-
-
+          .on("mouseout", tip.hide);
 
       // create X axis
       svg.append("g")
@@ -277,39 +270,40 @@ window.onload = function() {
       height = 300 - margin.top - margin.bottom;
 
 
-      xLine = d3.scale.linear()
-              .domain([2012, 2017])
+      var x = d3.scale.linear()
+              .domain([2010, 2017])
               .range([0, width]);
 
-      yLine = d3.scale.linear()
+      var y = d3.scale.linear()
                       .domain([100000, 40000])
                       .range([0, height]);
 
+
+      var years = ["2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017"]
       var xAxis = d3.svg.axis()
-                    .scale(xLine)
+                    .scale(x)
                     .orient("bottom")
-                    .ticks("6")
-                    .tickFormat(function (d) {
-                      return d;
+                    // .ticks("7")
+                    .tickFormat(function (d, i) {
+                      return years[i];
                     });
 
       var yAxis = d3.svg.axis()
-                    .scale(yLine)
+                    .scale(y)
                     .orient("left")
                     .ticks("6");
 
 
       var valueLine = d3.svg.line()
                         .x(function(d) {
-                          return xLine(d.year);
+                          return x(d.year);
                         })
                         .y(function(d) {
-                           return yLine(+d.burglaryRate);
+                           return y(+d.burglaryRate);
                         })
                         .interpolate("basis");
 
-         var svg = d3.select("#container-line-NL")
-                      .attr("id", "oneLine")
+         var svg = d3.select("#container-line")
                       .append("svg")
                       .attr("width", width + margin.left + margin.right)
                       .attr("height", height + margin.top + margin.bottom)
@@ -363,9 +357,9 @@ window.onload = function() {
 
     function makeMultiLine(dataCrime){
 
-      var margin = {top: 40, right: 22, bottom: 40, left: 60},
-      width = 570 - margin.left - margin.right,
-      height = 400 - margin.top - margin.bottom;
+      var margin = {top: 30, right: 12, bottom: 30, left: 50},
+      width = 470 - margin.left - margin.right,
+      height = 300 - margin.top - margin.bottom;
 
       xMulti = d3.scale.linear()
               .domain([1948, 2017])
@@ -397,6 +391,32 @@ window.onload = function() {
                      .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
                      .attr("id", "nederlandMisdaad");
 
+
+      // const annotations = [
+      //   {
+      //     type: d3.annotationCalloutCircle,
+      //     note: {
+      //       label: "There is no vast explanation",
+      //       title: "Myth of decreasing crime",
+      //       wrap: 140
+      //     },
+      //     subject:{
+      //       radius: 50
+      //     },
+      //   x: 620,
+      //   y: 150,
+      //   dy: 137,
+      //   dx: 102
+      // }].map(function (d) { d.color = "#E8336D"; return d});
+      //
+      // const makeAnnotations = d3.annotation()
+      //                           .type(d3.annotationLabel)
+      //                           .annotations(annotations);
+      //
+      // d3.select("svg")
+      //   .append("g")
+      //   .attr("class", "annotation-group")
+      //   .call(makeAnnotations);
 
       var lineOne = d3.svg.line()
                       .x(function (d) {
@@ -463,6 +483,15 @@ window.onload = function() {
             .style("stroke", "light-blue")
             .attr("visibility", "visible");
 
+        svg.append("text")
+            //  .attr("transform", "translate(" + (width / 2) + "," + (height + 145) + ")")
+              .attr("y", -2)
+              .attr("x", 170)
+              .style("font-size", "14px")
+            //  .style("font-weight", "bold")
+              .style("font-family", "calibri")
+              .style("text-anchor", "middle")
+              .text("Crime in the Netherlands");
 
           svg.append("text")
                 .attr("y", 10)
@@ -475,90 +504,62 @@ window.onload = function() {
 
           svg.append("text")
               //  .attr("transform", "translate(" + (width / 2) + "," + (height + 145) + ")")
-                .attr("y", 315)
-                .attr("x", 470)
+                .attr("y", 235)
+                .attr("x", 370)
                 .style("font-size", "10px")
               //  .style("font-weight", "bold")
                 .style("font-family", "calibri")
                 .style("text-anchor", "middle")
                 .text("years");
 
-            svg.selectAll("circle")
-              .data([10])
-              .enter().append("circle")
-              .attr("cy", 23)
-              .attr("cx", 380)
-              .attr("r", 5)
-              .style("fill", "red");
-
-            svg.append("text")
-                  .attr("y", 24)
-                  .attr("x", 420)
-                  .style("font-size", "10px")
-                  .style("font-family", "calibri")
-                  .style("text-anchor", "middle")
-                  .text("The Mystery of")
-                  .style("text-decoration", "underline")
-                  .on("click", function() {
-                    window.open("https://www.cbs.nl/nl-nl/achtergrond/2018/19/het-mysterie-van-de-verdwenen-criminaliteit");
-                  });
-
-            svg.append("text")
-                  .attr("y", 34)
-                  .attr("x", 445)
-                  .style("font-size", "10px")
-                  .style("font-family", "calibri")
-                  .style("text-anchor", "middle")
-                  .text("the Decreasing Crime")
-                  .style("text-decoration", "underline")
-                  .on("click", function() {
-                    window.open("https://www.cbs.nl/nl-nl/achtergrond/2018/19/het-mysterie-van-de-verdwenen-criminaliteit");
-                  });
-
-
 
     }
 
     function makeLineBar(selectedBar, y){
 
-      d3.select("#oneLine").selectAll("circle")
-         .remove();
+      d3.select("#nederlandVertrouwen").selectAll("circle")
+        .remove();
 
-      d3.select("#oneLine").selectAll(".lineTrust")
-         .remove();
+      d3.select("#nederlandVertrouwen").selectAll(".line")
+        .remove();
 
         console.log(selectedBar);
 
-      svg = d3.select("#oneLine");
+      svg = d3.select("#nederlandVertrouwen");
 
+      svg.select("#nederlandVertrouwen").select("selectedBar")
+          .style("fill", "grey");
 
-      var yThisLine = d3.scale.linear()
-              .domain([100, 0])
-              .range([0, 240]);
+      var x = d3.scale.linear()
+              .domain([2012, 2017])
+              .range([50, 350]);
+
+      var xAxis = d3.svg.axis()
+                    .scale(x)
+                    .tickValues([2012, 2013, 2014, 2015, 2016, 2017])
+                    .tickFormat(d3.format(".0"));
 
       var valueLine = d3.svg.line()
                         .x(function(d) {
-                          return 50 + xLine(d.year);
+                          return x(d.year);
                         })
                         .y(function(d) {
-                           return 50 + yThisLine(+d[selectedBar]);
+                           return 275 - y(+d[selectedBar]);
                         });
 
-
       var tip = d3.tip()
-                  .attr("class", "tooltipLineNL")
+                  .attr("class", "d3-tip")
                   .offset([-20, 0])
                   .html(function (d) {
-                    return "<tip-visible><span>" + (d[selectedBar]) + "% of trust in " + selectedBar + "</span>"
+                    return "<tip-visible><span>" + d.year + "</span>"
                   });
 
 
       svg.call(tip);
 
       svg.append("path")
-          .attr("class", "lineTrust")
-          .attr("d", valueLine(dataArrayNLLine))
-          .style("stroke", "red");
+          .attr("class", "line")
+          .attr("d", valueLine(dataArrayNLLine));
 
        // Add the scatterplot
        svg.selectAll("dot")
@@ -566,14 +567,70 @@ window.onload = function() {
             .enter()
             .append("circle")
            .attr("r", 5)
-           .attr("cx", function(d) { return 50 + xLine(d.year); })
-           .attr("cy", function(d) { return 50 + yThisLine(d[selectedBar]); })
-           .style("fill", "red")
+           .attr("cx", function(d) { return x(d.year); })
+           .attr("cy", function(d) { return 275 - y(d[selectedBar]); })
+           .style("fill", "blue")
            .on("mouseover", tip.show)
            .on("mouseout", tip.hide);
 
 
+
+
     }
+
+    // function makeScatter(dataNL, dataIB){
+    //   console.log(dataNL);
+    //
+    //   var margin = {top: 100, right: 100, bottom: 60, left: 100},
+    //      width = 700 - margin.left - margin.right,
+    //      height = 600 - margin.top - margin.bottom;
+    //
+    //   var svg = d3.select("#container-scatter")
+    //               .append("svg")
+    //               .attr("width", width + margin.left + margin.right)
+    //               .attr("height", height + margin.top + margin.bottom)
+    //               .append("g")
+    //               .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    //
+    //   var y = d3.scale.linear()
+    //             .domain([0, 100])
+    //             .range([height, 0]);
+    //
+    //   var x = d3.scale.linear()
+    //             .domain([0, 100])
+    //             .range([0, width]);
+    //
+    //   var xAxis = d3.svg.axis()
+    //                 .scale(x)
+    //                 .orient("bottom");
+    //
+    //
+    //   var yAxis = d3.svg.axis()
+    //                 .scale(y)
+    //                 .orient("left");
+    //
+    //
+    //   svg.selectAll(".dot")
+    //       .data(dataNL)
+    //       .enter()
+    //       .append("circle")
+    //       .attr("cx", function (d){
+    //         return x(d.bank);
+    //       })
+    //       .attr("cy", function (d){
+    //         return y(d.church);
+    //       })
+    //       .attr("r", 4);
+    //
+    //   svg.append("g")
+    //       .attr("class", "axis")
+    //       .attr("transform", "translate(0," + height + ")")
+    //       .call(xAxis);
+    //
+    //   svg.append("g")
+    //       .attr("class", "axis")
+    //       .call(yAxis);
+    //
 
 // close onload function
 }
@@ -611,35 +668,4 @@ function hideLineFour(){
     line.attr("visibility", "visible")
   }
 
-}
-
-function checkBucket(n){
-  // give specific color accordingly to percentages
-  if (n < 20) {
-    return 'rgb(178,24,43)'
-  }
-  if (n < 30) {
-    return 'rgb(214,96,77)'
-  }
-  if (n < 40) {
-    return 'rgb(244,165,130)'
-  }
-  if (n < 50) {
-    return 'rgb(253,219,199)'
-  }
-  if (n < 60) {
-    return 'rgb(209,229,240)'
-  }
-  if (n < 70){
-    return 'rgb(146,197,222)'
-  }
-  if (n < 80){
-    return 'rgb(67,147,195)'
-  }
-  if (n < 90){
-    return 'rgb(33,102,172)'
-  }
-  if (n < 10){
-    return 'rgb(5,48,97)'
-  }
 }

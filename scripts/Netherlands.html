@@ -7,22 +7,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
-    <script src="/datamaps.world.min.js"></script>
     <!-- version 3.3 of d3 -->
     <script src="https://d3js.org/d3.v3.js"></script>
+    <!-- For use of annotation -->
+    <link href='https://fonts.googleapis.com/css?family=Lato:300,900' rel='stylesheet' type='text/css'>
     <!-- to use queue anyways -->
     <script src="https://d3js.org/queue.v1.min.js"></script>
-        <script src="https://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+      <script src="https://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
     <!-- Optional JavaScript -->
-    <link rel="stylesheet" href="styles.css"  type="text/css"></script>
-    <script src="Europe.js"></script>
-    <title>Trust and Crime in Europe</title>
+    <link rel="stylesheet" href="styles.css"  type="text/css"></link>
+    <script src="Netherlands.js"></script>
+    <title>Trust and Crime in the Netherlands</title>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -35,31 +35,21 @@
           <a class="nav-item nav-link active" href="index.html">Europe<span class="sr-only">(current)</span></a>
           <a class="nav-item nav-link" href="Netherlands.html">Netherlands</a>
           <a class="nav-item nav-link" href="Story.html">Story</a>
-          <a class="nav-item nav-link" href="Netherlandstest.html">TEST</a>
         </div>
       </div>
     </nav>
-    <div id="years-button" style="position: absolute; left: 635px; top: 80px">
-    </div>
-    <div id="container-map" width="500" height="700" style="position: absolute; left: 30px; top: 110px;">
-    </div>
-    <div id="introduction-EU" style="position: absolute; width: 350px; height: 35px; left: 500px; top: 130px;">
-      <h1> Trust in Europe </h1>
-      <p1>
-      The European Union came forth from the European Coal and Steel Community.
-      A community build after the second world war, to prevent a new war from happening - as
-      for war you'll need coal and steel. The ECSC developped further into the contemporary
-      EU. But with the Brexit, the unrest in Spain and Turkey - it seems that the European Deficit,
-      the gap between the citizen and the leaders in Europe, is increasing. But is there really a lack
-      of trust between them? Judge yourself: chose a year from which you like to see data, click on a country
-      and see how the citizens rate their trust.
-    </p1>
-    <br><p2><a href="http://statline.cbs.nl/Statweb/">CBS, 2018</a></p2>
-    <br>
-    <p2>Ellemijke Donner | 10734198 | Minor Programmeren</p2>
+      <svg id="container-bar" width ="500" height="400" style="position: absolute; left: 630px; top: 100px;">
+      </svg>
+      <svg id="container-line" width="350" height="300" style="position: absolute; left: 30px; top: 100px">
+      </svg>
+      <div style="position: absolute; left: 550px; top: 625px">
+      <form>
+      <div><input type="checkbox" checked id="lineTwoCheck" onclick="hideLineTwo();"> Capital Crime </div>
+      <div><input type="checkbox" checked id="LineThreeCheck" onclick="hideLineThree();"> Vandalism </div>
+      <div><input type="checkbox" checked id="LineFourCheck" onclick="hideLineFour();"> Violence </div>
+    </form>
   </div>
-    <div id="container-bar" width="500" height="700" style="position: absolute; left: 830px; top: 130px;">
-    </div>
-    
+      <svg id="container-line-multi" width="500" height="300" style="position: absolute; left: 30px; top: 450px" >
+    </svg>
   </body>
 </html>

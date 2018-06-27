@@ -1,27 +1,23 @@
-path:hover {
-	fill-opacity: .7;
+/*CSS styling for javascript and html, by Ellemijke Donner, 10734198, for final project minor.*/
+
+/*Tooltips for barchart EU, barchart NL, linegraph NL */
+
+.tooltipMapEU{
+	position: relative;
+	font: 12px calibri;
 }
 
-/* Style for Custom Tooltip*/
-/* div.tooltip {
- 	position: absolute;
-	text-align: left;
-	width: 60px;
-	height: 28px;
-	padding: 2px;
-	font: 12px calibri;
-	color: navy;
-	pointer-events: auto;
-} */
+.tooltipBarEU {
+    position: relative;
+		font: 11px calibri;
+}
 
-/* Tooltip container */
 .tooltipBarNL {
     position: relative;
     display: inline-block;
 		font: 11px calibri;
 }
 
-/* Style for Custom Tooltip*/
 .tooltipLineNL {
  	position: absolute;
 	text-align: left;
@@ -34,8 +30,26 @@ path:hover {
 	pointer-events: auto;
 }
 
+/* Set titles and text for graphs*/
+.title-multi-line{
+	font: 18px calibri;
+	font-weight: bold;
+}
 
-/* Give axis nice look */
+.title-normal{
+	font: 16px calibri;
+	font-weight: bold;
+	color: black;
+	text-align: center;
+}
+
+.graph-text{
+	font: 10px calibri;
+	text-align: center;
+}
+
+/* Axis styles for all the graphs */
+
 .axis path,
 .axis line {
     fill: none;
@@ -45,14 +59,12 @@ path:hover {
 }
 
 .axis text {
-    font-family: sans-serif;
-    font-size: 11px;
+    font: 11px calibri;
 }
 
 
+/* Styling of titles and paragraphs*/
 
-
-/* Style h1 and h2*/
 h1
 {
 	font: 18px calibri;
@@ -78,9 +90,9 @@ p2
 	text-align: center;
 }
 
-
+/* Styling for line graphs */
 path {
-    stroke: steelblue;
+    stroke: rgb(67,147,195);
     stroke-width: 2;
     fill: none;
 }
@@ -89,57 +101,21 @@ path {
   stroke: #000;
 }
 
+/* styling barcharts */
 .bar:hover {
-  fill: grey;
+  opacity: 0.3;
 }
 
+/* style for button */
 #years-button {
   border: 5px solid powderblue;
   text-align: center;
   font-size: 16px;
 }
 
-/* #container-map {
-	border: 1px solid powderblue;
-}
-
-#container-bar {
-	border: 1px solid powderblue;
-} */
-
-#container-line{
-	border: 1px solid powderblue;
-}
-
-#container-line-NL{
-	border: 1px solid powderblue;
-}
-
-.d3-tip-bars-EU {
- 	position: absolute;
-	text-align: left;
-	width: 60px;
-	height: 28px;
-	padding: 2px;
-	font: 12px calibri;
-	color: white;
-	pointer-events: auto;
-}
-
-#background-black{
-	background-color: black;
-}
+/*placing of containers*/
 
 #introduction-EU{
 	text-align: center;
 	display: inline-block;
-}
-
-.title-multi-line{
-	font: 18px calibri;
-	color: red;
-	text-decoration-line: underline;
-  position: absolute;
-	left: 550px;
-	top: 455px;
 }

@@ -1,52 +1,56 @@
-<!-- code for navbar: https://getbootstrap.com/docs/4.1/components/navbar/#nav -->
+<!-- HTML for page containg the story, by Ellemijke Donner, 10734198,
+for final project programmeren. Got code for navbar from https://getbootstrap.com/docs/4.1/components/navbar/#nav -->
+
 <!doctype html>
 <html lang="en">
   <head>
+
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-    <!-- Optional JavaScript -->
+
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
     <!-- version 3.3 of d3 -->
     <script src="https://d3js.org/d3.v3.js"></script>
+
     <!-- to use queue anyways -->
     <script src="https://d3js.org/queue.v1.min.js"></script>
     <link rel="stylesheet" href="styles.css"  type="text/css"></link>
-    <!-- Optional JavaScript -->
-    <script src="Story.js"></script>
     <title>Story behind Trust</title>
   </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#"></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-item nav-link active" href="index.html">Europe<span class="sr-only">(current)</span></a>
-          <a class="nav-item nav-link" href="Netherlands.html">Netherlands</a>
-          <a class="nav-item nav-link" href="Story.html">Story</a>
+    <body>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-item nav-link active" href="Story.html">Story<span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" href="Europe.html">Europe</a>
+            <a class="nav-item nav-link" href="Netherlands.html">Netherlands</a>
+          </div>
         </div>
-      </div>
     </nav>
-    <h1 style="position: absolute; left: 600px; top: 60px;"> Trust as a Solution </h1>
-    <img src="crime.png" alt="Crime Headlines" style="position: absolute; left: 10px; top: 55px;" width="400" height="450">
-    <img src="vertrouwen.png" alt="Trust Headlines" style="position: absolute; left: 950px; top: 55px;" width="400" height="450">
-    <iframe style="position: absolute; left: 450px; top: 100px;" width="480" height="270" frameBorder="0" src="//media-service.vara.nl/player.php?id=367395"></iframe>
-    <div id="introduction-Story" style="position: absolute; width: 480px; height: 35px; left: 450px; top: 380px;">
-    <p1>
-      In this video, Jan Terlouw, a former Dutch politician emphasizes the importance of trust.
-      Trust in each other, trust in politicians and trust in humanity. He hightlights how important
-      this factor of trust is in a society - and refers to 'the old days' when doors were never
-      locked and trust was omnipresent. But is this nostalgia for past times well-grounded? Find out
-      by clicking through this site!
-    </p1>
-  </div>
-  </body>
+      <h1 style="position: absolute; left: 600px; top: 60px;"> Trust as a Solution </h1>
+      <img src="crime.png" alt="Crime Headlines" style="position: absolute; left: 10px; top: 55px;" width="400" height="450">
+      <img src="vertrouwen.png" alt="Trust Headlines" style="position: absolute; left: 950px; top: 55px;" width="400" height="450">
+      <iframe style="position: absolute; left: 450px; top: 100px;" width="480" height="270" frameBorder="0" src="//media-service.vara.nl/player.php?id=367395"></iframe>
+      <div id="introduction-Story" style="position: absolute; width: 480px; height: 35px; left: 450px; top: 380px;">
+        <p1>
+          In this video, Jan Terlouw, a former Dutch politician emphasizes the importance of trust.
+          Trust in each other, trust in politicians and trust in humanity. He hightlights how important
+          this factor of trust is in a society - and refers to 'the old days' when doors were never
+          locked and trust was omnipresent. But is this nostalgia for past times well-grounded? Find out
+          by clicking through this site!
+        </p1>
+      </div>
+    </body>
 </html>

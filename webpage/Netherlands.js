@@ -1,6 +1,5 @@
-var dataArrayCrimeTotal;
-var xMulti;
-var yMulti;
+/*JavaScript for page about Netherlands, by Ellemijke Donner, 10734198,
+for final project programmeren.*/
 
 window.onload = function() {
 
@@ -10,37 +9,42 @@ window.onload = function() {
     .defer(d3.json, 'crimeRatesTotals.json')
     .awaitAll(getData);
 
+    /*getData to reformat data, to be able to use it in different graphs. Calls
+    makeBar, makeLine, makeMultiLine*/
     function getData(error, response) {
-       var dataInbraak = response[0].All_data;
-       var dataNetherlands = response[1].All_data;
-       var dataCrimeTotal = response[2].value;
 
-       if (error) throw error;
-       var dataArrayInbraak = [];
-       var dataArrayInbraakScatter =[];
-       dataArrayNLLine =[];
-       dataArrayCrimeTotal = [];
-       dataArrayNLBar = [];
+      // get responses
+      var dataInbraak = response[0].All_data;
+      var dataNetherlands = response[1].All_data;
+      var dataCrimeTotal = response[2].value;
 
-       // iterate over data, add the right data to a certain country
-       for (var i = 0; i < 70; i++)
+      if (error) throw error;
+      var dataArrayInbraak = [];
+      var dataArrayInbraakScatter =[];
+      dataArrayNLLine =[];
+      dataArrayCrimeTotal = [];
+      dataArrayNLBar = [];
+
+      // iterate over data, add the right data to a certain country
+      for (var i = 0; i < 70; i++)
+      {
+       var year = dataCrimeTotal[i].Perioden;
+       var violenceCrime = Number(dataCrimeTotal[i].Geweldsmisdrijven_8);
+       var totalCrime = Number(dataCrimeTotal[i].MisdrijvenTotaal_7);
+       var capitalCrime = Number(dataCrimeTotal[i].Vermogensmisdrijven_9);
+       var vandalismCrime = Number(dataCrimeTotal[i].VernielingenMisdrOpenbOrdeGezag_10);
+
+      dataArrayCrimeTotal.push(
        {
-         var year = dataCrimeTotal[i].Perioden;
-         var violenceCrime = Number(dataCrimeTotal[i].Geweldsmisdrijven_8);
-         var totalCrime = Number(dataCrimeTotal[i].MisdrijvenTotaal_7);
-         var capitalCrime = Number(dataCrimeTotal[i].Vermogensmisdrijven_9);
-         var vandalismCrime = Number(dataCrimeTotal[i].VernielingenMisdrOpenbOrdeGezag_10);
+         year: Number(year.slice(0, 4)),
+         violenceCrime: violenceCrime,
+         totalCrime: totalCrime,
+         capitalCrime: capitalCrime,
+         vandalismCrime: vandalismCrime
+       });
 
-       dataArrayCrimeTotal.push(
-         {
-           year: Number(year.slice(0, 4)),
-           violenceCrime: violenceCrime,
-           totalCrime: totalCrime,
-           capitalCrime: capitalCrime,
-           vandalismCrime: vandalismCrime
-         });
-       // sluit for loop
-       }
+      // close for loop
+      }
 
       // iterate over data, add the right data to a certain country
       for (var i = 2; i < 8; i++)
@@ -53,11 +57,12 @@ window.onload = function() {
           year: year,
           burglaryRate: burglaryRate
         });
-      // sluit for loop
-      }
-      console.log(dataArrayInbraakScatter);
 
-      for (var i = 0; i < 8; i++)
+      // close for loop
+      }
+
+      // iterate over data, add the right data
+      for (var i = 2; i < 8; i++)
       {
         var year = Number(dataInbraak[i].Year);
         var burglaryRate = Number(dataInbraak[i].Burglary);
@@ -67,7 +72,8 @@ window.onload = function() {
           year: year,
           burglaryRate: burglaryRate
         });
-      // sluit for loop
+
+      // close for loop
       }
 
       for (var i = 0; i < 6; i++)
@@ -87,17 +93,18 @@ window.onload = function() {
         dataArrayNLLine.push(
           {
             year: year,
-            bank: bank,
-            church: church,
-            civilServant: civilServant,
-            companies: companies,
-            europe: europe,
-            humanity: humanity,
-            justice: justice,
-            parliament: parliament,
-            police: police,
-            press: press
+            Bank: bank,
+            Church: church,
+            Administrators: civilServant,
+            Companies: companies,
+            Europe: europe,
+            Humanity: humanity,
+            Justice: justice,
+            Parliament: parliament,
+            Police: police,
+            Press: press
           });
+
       // close second for loop
       }
 
@@ -116,76 +123,77 @@ window.onload = function() {
 
         dataArrayNLBar.push(
           {
-            bank: bank,
-            church: church,
-            civilServant: civilServant,
-            companies: companies,
-            europe: europe,
-            humanity: humanity,
-            justice: justice,
-            parliament: parliament,
-            police: police,
-            press: press
+            Bank: bank,
+            Church: church,
+            Administrators: civilServant,
+            Companies: companies,
+            Europe: europe,
+            Humanity: humanity,
+            Justice: justice,
+            Parliament: parliament,
+            Police: police,
+            Press: press
           });
-      // close second for loop
+
+      // close for loop
       }
 
       makeBar(dataArrayNLBar);
       makeLine(dataArrayInbraak);
       makeMultiLine(dataArrayCrimeTotal);
-      //makeScatter(dataArrayNL, dataArrayInbraakScatter);
+
       // close getData function
     }
 
+    /*makeBar makes static barchar (data from 2012), does not call other functions.*/
     function makeBar(data){
 
       // set width and height of chart, of svg, set margins etc.
+      var margin = {height: 75, width: 50};
       var width = 300;
       var height = 200;
       var barPadding = 4;
-      var heightMargin = 75;
-      var widthMargin = 50;
       var maxValue = 100;
       var numberVariables = 10;
 
 
+      var temp = Object.keys(data[0]);
+
       // make the SVG
       var svg = d3.select("#container-bar")
                   .append("svg")
-                  .attr("width", width + widthMargin)
-                  .attr("height", height + (2 * heightMargin))
+                  .attr("width", width + margin.width)
+                  .attr("height", height + (2 * margin.height))
                   .append("g")
                   .attr("id", "nederlandVertrouwen");
 
 
-      //  tooltip for barchart
+      // tooltip for barchart
       var tip = d3.tip()
-                  .attr("class", "d3-tip")
-                  .offset([-20, 0])
-                  .html(function (d, i) {
-                    return "click to see line"
+                  .attr("class", "tooltipBarNL")
+                  .html(function (d) {
+                    return +data[0][d] + "%";
                   });
 
       // show tooltip
       svg.call(tip);
 
-      // define scales
+      // define x scale
       var x = d3.scale.linear()
                       .domain([0, numberVariables])
-                      .range([widthMargin, width + widthMargin]);
+                      .range([margin.width, width + margin.width]);
 
-
+      // define y scale
       var y = d3.scale.linear()
                       .domain([0, maxValue])
                       .range([0, height]);
 
+      // make axisScale
       var axisScale = d3.scale.linear()
                         .domain([0, maxValue])
                         .range([height, 0]);
 
-      var temp = Object.keys(data[0]);
-
-      // set axis
+      // set x axis
       var xAxis = d3.svg.axis()
                     .scale(x)
                     .orient("bottom")
@@ -194,195 +202,200 @@ window.onload = function() {
                       return temp[d];
                     });
 
+      // set y axis
       var yAxis = d3.svg.axis()
                     .scale(axisScale)
                     .orient("left");
 
       var dataBar = Object.keys(data[0]);
 
-      // create SVG barchart
+      // create bars from barchart
       svg.selectAll(".bar")
           .data(dataBar)
           .enter()
           .append("rect")
           .attr("class", "bar")
           .attr("x", function (d, i){
-            return i * (width / numberVariables) + widthMargin;
+            return i * (width / numberVariables) + margin.width;
           })
           .attr("y", function (d, i) {
-            return height + heightMargin - y(+data[0][d]);
-          })
-          .attr("width", width / numberVariables - barPadding)
-          .attr("height", function(d){
-            return y(+data[0][d]);
+            return height + margin.height - y(+data[0][d]);
           })
           .on("click", function (d){
             makeLineBar(d, y);
           })
-          .attr("fill", "pink")
+          .attr("fill", function (d) {
+            return checkBucket(+data[0][d]);
+          })
           .on("mouseover", tip.show)
-          .on("mouseout", tip.hide);
+          .on("mouseout", tip.hide)
+          .transition()
+            .delay(function (d, i) { return i* 100;})
+            .duration(100)
+            .attr("width", width / numberVariables - barPadding)
+            .attr("height", function(d){
+                return y(+data[0][d]);
+            });
 
-      // create X axis
+      // draw x axis
       svg.append("g")
           .attr("class","axis")
-          .attr("transform", "translate(0," + (height + heightMargin) + ")")
+          .attr("transform", "translate(0," + (height + margin.height) + ")")
           .call(xAxis)
           .selectAll("text")
           .style("text-anchor", "end")
           .attr("transform", "rotate(-50)");
 
-      // create Y axis
+      // draw y axis
       svg.append("g")
           .attr("class", "axis")
-          .attr("transform", "translate(" + widthMargin + "," +
-                 heightMargin + ")")
+          .attr("transform", "translate(" + margin.width + "," +
+                 margin.height + ")")
           .call(yAxis);
 
+      // append title graph
       svg.append("text")
-          //  .attr("transform", "translate(" + (width / 2) + "," + (height + 145) + ")")
-            .attr("y", 50)
-            .attr("x", 170)
-            .style("font-size", "14px")
-          //  .style("font-weight", "bold")
-            .style("font-family", "calibri")
-            .style("text-anchor", "middle")
-            .text("Trust in the Netherlands (2012)");
+            .attr("y", 60)
+            .attr("x", 120)
+            .attr("class", "title-normal")
+            .text("Trust rates in 2012");
 
-     svg.append("text")
+      // append graph texts
+      svg.append("text")
+          .attr("class", "graph-text")
           .attr("y", 85)
           .attr("x", 57)
-          .style("font-size", "10px")
-          //.attr("transform", "rotate(-90)")
-          .style("font-family", "calibri")
-          .style("text-anchor", "middle")
           .text("%");
 
-              // close makeBar
-            }
+     // close makeBar
+     }
 
+    /*makeLine graph makes a single line, does not call any other functions.*/
     function makeLine(data){
-      // http://bl.ocks.org/d3noob/b3ff6ae1c120eea654b5
-      // got code inspiration from above.
 
+      // set margins for svg
       var margin = {top: 30, right: 20, bottom: 30, left: 50},
       width = 350 - margin.left - margin.right,
       height = 300 - margin.top - margin.bottom;
 
-
-      var x = d3.scale.linear()
-              .domain([2010, 2017])
+      // set x scale
+      xLine = d3.scale.linear()
+              .domain([2012, 2017])
               .range([0, width]);
 
-      var y = d3.scale.linear()
+      // set y sacle
+      yLine = d3.scale.linear()
                       .domain([100000, 40000])
                       .range([0, height]);
 
-
-      var years = ["2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017"]
+      // make x axis
       var xAxis = d3.svg.axis()
-                    .scale(x)
+                    .scale(xLine)
                     .orient("bottom")
-                    // .ticks("7")
-                    .tickFormat(function (d, i) {
-                      return years[i];
+                    .ticks("6")
+                    .tickFormat(function (d) {
+                      return d;
                     });
 
+      // make y axis
       var yAxis = d3.svg.axis()
-                    .scale(y)
+                    .scale(yLine)
                     .orient("left")
                     .ticks("6");
 
-
+      // make line
       var valueLine = d3.svg.line()
                         .x(function(d) {
-                          return x(d.year);
+                          return xLine(d.year);
                         })
                         .y(function(d) {
-                           return y(+d.burglaryRate);
+                           return yLine(+d.burglaryRate);
                         })
                         .interpolate("basis");
 
-         var svg = d3.select("#container-line")
-                      .append("svg")
-                      .attr("width", width + margin.left + margin.right)
-                      .attr("height", height + margin.top + margin.bottom)
-                      .append("g")
-                      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+      // make svg
+      var svg = d3.select("#container-line-NL")
+                  .attr("id", "oneLine")
+                  .append("svg")
+                  .attr("width", width + margin.left + margin.right)
+                  .attr("height", height + margin.top + margin.bottom)
+                  .append("g")
+                  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-        svg.append("path")
-            .attr("class", "line")
-            .attr("d", valueLine(data));
+      // draw line
+      svg.append("path")
+          .attr("class", "line")
+          .attr("d", valueLine(data));
 
-        svg.append("g")
-            .attr("class", "x axis")
-            .attr("transform", "translate(0," + height + ")")
-            .call(xAxis);
+      // draw x axis
+      svg.append("g")
+          .attr("class", "x axis")
+          .attr("transform", "translate(0," + height + ")")
+          .call(xAxis);
 
-        svg.append("g")
-            .attr("class", "y axis")
-            .call (yAxis);
+      // draw y axis
+      svg.append("g")
+          .attr("class", "y axis")
+          .call (yAxis);
 
-        svg.append("text")
-            //  .attr("transform", "translate(" + (width / 2) + "," + (height + 145) + ")")
-              .attr("y", - 15)
-              .attr("x", 120)
-              .style("font-size", "14px")
-            //  .style("font-weight", "bold")
-              .style("font-family", "calibri")
-              .style("text-anchor", "middle")
-              .text("Burglary rates in the Netherlands");
-
+      // append graph title
       svg.append("text")
-          //  .attr("transform", "translate(" + (width / 2) + "," + (height + 145) + ")")
-            .attr("y", 233)
-            .attr("x", 264)
-            .style("font-size", "10px")
-          //  .style("font-weight", "bold")
-            .style("font-family", "calibri")
-            .style("text-anchor", "middle")
-            .text("years");
+         .attr("y", - 15)
+         .attr("x", 60)
+         .attr("class", "title-normal")
+         .text("Home burglary rates");
 
+      // append text to graph x axis
+      svg.append("text")
+            .attr("y", 235)
+            .attr("x", 255)
+            .attr("class", "graph-text")
+            .text("Years");
+
+      // append text to graph y axis
       svg.append("text")
             .attr("y", 10)
-            .attr("x", -20)
-            .style("font-size", "10px")
+            .attr("x", -85)
+            .attr("class", "graph-text")
             .attr("transform", "rotate(-90)")
-            .style("font-family", "calibri")
-            .style("text-anchor", "middle")
-            .text("quantities");
+            .text("Number of Burglaries");
 
-
+        // close makeLine
         }
 
+    /*makeMultiLine makes four lines, that appear and disseaper when user clicks
+    on html button*/
     function makeMultiLine(dataCrime){
 
-      var margin = {top: 30, right: 12, bottom: 30, left: 50},
-      width = 470 - margin.left - margin.right,
-      height = 300 - margin.top - margin.bottom;
+      // set margins
+      var margin = {top: 40, right: 20, bottom: 40, left: 60},
+      width = 670 - margin.left - margin.right,
+      height = 400 - margin.top - margin.bottom;
 
+      // set x for scale global, as it is used in other functions.
       xMulti = d3.scale.linear()
-              .domain([1948, 2017])
-              .range([0, width]);
+                .domain([1948, 2017])
+                .range([0, width]);
 
+      // set y for scale global aswell, as it is used in other functions aswell.
       yMulti = d3.scale.linear()
-                      .domain([100, 0])
-                      .range([0, height]);
+                .domain([100, 0])
+                .range([0, height]);
 
+      // make x axis
       var xAxis = d3.svg.axis()
                     .scale(xMulti)
                     .orient("bottom")
-                    //.ticks(1948, 2017)
                     .tickValues([1948, 1958, 1968, 1978, 1988, 1998, 2008, 2017])
                     .tickFormat(d3.format(".0"));
 
-
+      // make y axis
       var yAxis = d3.svg.axis()
                     .scale(yMulti)
                     .orient("left")
                     .ticks("10");
 
-
+      // make svg
       var svg = d3.select("#container-line-multi")
                      .append("svg")
                      .attr("width", width + margin.left + margin.right)
@@ -391,34 +404,8 @@ window.onload = function() {
                      .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
                      .attr("id", "nederlandMisdaad");
 
-
-      // const annotations = [
-      //   {
-      //     type: d3.annotationCalloutCircle,
-      //     note: {
-      //       label: "There is no vast explanation",
-      //       title: "Myth of decreasing crime",
-      //       wrap: 140
-      //     },
-      //     subject:{
-      //       radius: 50
-      //     },
-      //   x: 620,
-      //   y: 150,
-      //   dy: 137,
-      //   dx: 102
-      // }].map(function (d) { d.color = "#E8336D"; return d});
-      //
-      // const makeAnnotations = d3.annotation()
-      //                           .type(d3.annotationLabel)
-      //                           .annotations(annotations);
-      //
-      // d3.select("svg")
-      //   .append("g")
-      //   .attr("class", "annotation-group")
-      //   .call(makeAnnotations);
-
-      var lineOne = d3.svg.line()
+      // make line of total rates
+      var lineTotal = d3.svg.line()
                       .x(function (d) {
                         return xMulti(d.year);
                       })
@@ -426,220 +413,190 @@ window.onload = function() {
                         return yMulti(+d.totalCrime);
                       });
 
-        svg.append("path")
-            .attr("class", "line")
-            .attr("d", lineOne(dataCrime))
-            .style("stroke", "red");
+      // draw line of total rates
+      svg.append("path")
+          .attr("class", "line")
+          .attr("d", lineTotal(dataCrime))
+          .style("stroke", "red");
 
-        svg.append("g")
-            .attr("class", "x axis")
-            .attr("transform", "translate(0," + height + ")")
-            .call(xAxis);
+      // draw x axis
+      svg.append("g")
+          .attr("class", "x axis")
+          .attr("transform", "translate(0," + height + ")")
+          .call(xAxis);
 
-        svg.append("g")
-            .attr("class", "y axis")
-            .call (yAxis);
+      // draw y axis
+      svg.append("g")
+          .attr("class", "y axis")
+          .call (yAxis);
 
-        var lineThree= d3.svg.line()
-                        .x(function (d) {
-                          return xMulti(d.year);
-                        })
-                        .y(function (d) {
-                          return yMulti(+d.vandalismCrime);
-                        });
+      // make line vandalism rates
+      var lineVandalism = d3.svg.line()
+                      .x(function (d) {
+                        return xMulti(d.year);
+                      })
+                      .y(function (d) {
+                        return yMulti(+d.vandalismCrime);
+                      });
 
-          svg.append("path")
-              .attr("id", "lineThree")
-              .attr("d", lineThree(dataCrime))
-              .style("stroke", "blue")
-              .attr("visibility", "visible");
+      // draw line vandalism
+      svg.append("path")
+          .attr("id", "lineVandalism")
+          .attr("d", lineVandalism(dataCrime))
+          .style("stroke", "blue")
+          .attr("visibility", "visible");
 
-        var lineTwo = d3.svg.line()
-                    .x(function (d) {
-                      return xMulti(d.year);
-                    })
-                    .y(function (d) {
-                      return yMulti(+d.capitalCrime);
-                    });
+      // make line capital
+      var lineCapital = d3.svg.line()
+                  .x(function (d) {
+                    return xMulti(d.year);
+                  })
+                  .y(function (d) {
+                    return yMulti(+d.capitalCrime);
+                  });
 
-        svg.append("path")
-          .attr("id", "lineTwo")
-          .attr("d", lineTwo(dataCrime))
+      // draw line capital
+      svg.append("path")
+          .attr("id", "lineCapital")
+          .attr("d", lineCapital(dataCrime))
           .style("stroke", "pink")
           .attr("visibility", "visible");
 
+      // make line violence
+      var lineViolence= d3.svg.line()
+                      .x(function (d) {
+                        return xMulti(d.year);
+                      })
+                      .y(function (d) {
+                        return yMulti(+d.violenceCrime);
+                      });
 
-        var lineFour= d3.svg.line()
-                        .x(function (d) {
-                          return xMulti(d.year);
-                        })
-                        .y(function (d) {
-                          return yMulti(+d.violenceCrime);
-                        });
+      // draw line violence
+      svg.append("path")
+          .attr("id", "lineViolence")
+          .attr("d", lineViolence(dataCrime))
+          .style("stroke", "light-blue")
+          .attr("visibility", "visible");
 
-        svg.append("path")
-            .attr("id", "lineFour")
-            .attr("d", lineFour(dataCrime))
-            .style("stroke", "light-blue")
-            .attr("visibility", "visible");
+      // write text y axis
+      svg.append("text")
+              .attr("y", 10)
+              .attr("x", -140)
+              .attr("class", "graph-text")
+              .attr("transform", "rotate(-90)")
+              .text("Registered crime per 1000 citizens");
 
-        svg.append("text")
-            //  .attr("transform", "translate(" + (width / 2) + "," + (height + 145) + ")")
-              .attr("y", -2)
-              .attr("x", 170)
-              .style("font-size", "14px")
-            //  .style("font-weight", "bold")
-              .style("font-family", "calibri")
-              .style("text-anchor", "middle")
-              .text("Crime in the Netherlands");
+      // write text x axis
+      svg.append("text")
+              .attr("y", 317)
+              .attr("x", 567)
+              .attr("class", "graph-text")
+              .text("Years");
 
-          svg.append("text")
-                .attr("y", 10)
-                .attr("x", -70)
-                .style("font-size", "10px")
-                .attr("transform", "rotate(-90)")
-                .style("font-family", "calibri")
-                .style("text-anchor", "middle")
-                .text("Registered crime per 1000 citizens");
+      // make single dot for link to datareport about decreasing crime
+      svg.selectAll("circle")
+            .data([10])
+            .enter().append("circle")
+            .attr("cy", 23)
+            .attr("cx", 465)
+            .attr("r", 5)
+            .style("fill", "red");
 
-          svg.append("text")
-              //  .attr("transform", "translate(" + (width / 2) + "," + (height + 145) + ")")
-                .attr("y", 235)
-                .attr("x", 370)
-                .style("font-size", "10px")
-              //  .style("font-weight", "bold")
-                .style("font-family", "calibri")
-                .style("text-anchor", "middle")
-                .text("years");
+      // append first part of text, next to the dot
+      svg.append("text")
+            .attr("y", 24)
+            .attr("x", 520)
+            .style("font-size", "11px")
+            .style("font-family", "calibri")
+            .style("text-anchor", "middle")
+            .text("The Mystery of")
+            .style("text-decoration", "underline")
+            .on("click", function() {
+                  window.open("https://www.cbs.nl/nl-nl/achtergrond/2018/19/het-mysterie-van-de-verdwenen-criminaliteit");
+            });
 
+      // append second part of text, next to the dot
+      svg.append("text")
+            .attr("y", 34)
+            .attr("x", 545)
+            .style("font-size", "11px")
+            .style("font-family", "calibri")
+            .style("text-anchor", "middle")
+            .text("the Decreasing Crime")
+            .style("text-decoration", "underline")
+            .on("click", function() {
+                window.open("https://www.cbs.nl/nl-nl/achtergrond/2018/19/het-mysterie-van-de-verdwenen-criminaliteit");
+            });
 
-    }
+     // close makeMultiLine
+     }
 
+    /*makeLineBar to make the line, when clicked on certain variable on barchart*/
     function makeLineBar(selectedBar, y){
 
-      d3.select("#nederlandVertrouwen").selectAll("circle")
-        .remove();
+      // remove existing circles
+      d3.select("#oneLine").selectAll("circle")
+         .remove();
 
-      d3.select("#nederlandVertrouwen").selectAll(".line")
-        .remove();
+      // remove existing lines
+      d3.select("#oneLine").selectAll(".lineTrust")
+         .remove();
 
-        console.log(selectedBar);
+      svg = d3.select("#oneLine");
 
-      svg = d3.select("#nederlandVertrouwen");
+      // make y scale
+      var yThisLine = d3.scale.linear()
+              .domain([100, 0])
+              .range([0, 240]);
 
-      svg.select("#nederlandVertrouwen").select("selectedBar")
-          .style("fill", "grey");
-
-      var x = d3.scale.linear()
-              .domain([2012, 2017])
-              .range([50, 350]);
-
-      var xAxis = d3.svg.axis()
-                    .scale(x)
-                    .tickValues([2012, 2013, 2014, 2015, 2016, 2017])
-                    .tickFormat(d3.format(".0"));
-
+      // make valueLine
       var valueLine = d3.svg.line()
                         .x(function(d) {
-                          return x(d.year);
+                          return 50 + xLine(d.year);
                         })
                         .y(function(d) {
-                           return 275 - y(+d[selectedBar]);
+                           return 50 + yThisLine(+d[selectedBar]);
                         });
 
+      // make tip
       var tip = d3.tip()
-                  .attr("class", "d3-tip")
+                  .attr("class", "tooltipLineNL")
                   .offset([-20, 0])
                   .html(function (d) {
-                    return "<tip-visible><span>" + d.year + "</span>"
+                    return "<tip-visible><span>" + (d[selectedBar]) + "% of trust in " + selectedBar + "</span>"
                   });
 
-
+      // call tip
       svg.call(tip);
 
+      // draw line
       svg.append("path")
-          .attr("class", "line")
-          .attr("d", valueLine(dataArrayNLLine));
+          .attr("class", "lineTrust")
+          .attr("d", valueLine(dataArrayNLLine))
+          .style("stroke", "rgb(239,138,98)");
 
-       // Add the scatterplot
+       // Add the dots
        svg.selectAll("dot")
            .data(dataArrayNLLine)
             .enter()
             .append("circle")
            .attr("r", 5)
-           .attr("cx", function(d) { return x(d.year); })
-           .attr("cy", function(d) { return 275 - y(d[selectedBar]); })
-           .style("fill", "blue")
+           .attr("cx", function(d) { return 50 + xLine(d.year); })
+           .attr("cy", function(d) { return 50 + yThisLine(d[selectedBar]); })
+           .style("fill", "rgb(239,138,98)")
            .on("mouseover", tip.show)
            .on("mouseout", tip.hide);
 
-
-
-
-    }
-
-    // function makeScatter(dataNL, dataIB){
-    //   console.log(dataNL);
-    //
-    //   var margin = {top: 100, right: 100, bottom: 60, left: 100},
-    //      width = 700 - margin.left - margin.right,
-    //      height = 600 - margin.top - margin.bottom;
-    //
-    //   var svg = d3.select("#container-scatter")
-    //               .append("svg")
-    //               .attr("width", width + margin.left + margin.right)
-    //               .attr("height", height + margin.top + margin.bottom)
-    //               .append("g")
-    //               .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-    //
-    //   var y = d3.scale.linear()
-    //             .domain([0, 100])
-    //             .range([height, 0]);
-    //
-    //   var x = d3.scale.linear()
-    //             .domain([0, 100])
-    //             .range([0, width]);
-    //
-    //   var xAxis = d3.svg.axis()
-    //                 .scale(x)
-    //                 .orient("bottom");
-    //
-    //
-    //   var yAxis = d3.svg.axis()
-    //                 .scale(y)
-    //                 .orient("left");
-    //
-    //
-    //   svg.selectAll(".dot")
-    //       .data(dataNL)
-    //       .enter()
-    //       .append("circle")
-    //       .attr("cx", function (d){
-    //         return x(d.bank);
-    //       })
-    //       .attr("cy", function (d){
-    //         return y(d.church);
-    //       })
-    //       .attr("r", 4);
-    //
-    //   svg.append("g")
-    //       .attr("class", "axis")
-    //       .attr("transform", "translate(0," + height + ")")
-    //       .call(xAxis);
-    //
-    //   svg.append("g")
-    //       .attr("class", "axis")
-    //       .call(yAxis);
-    //
+     // close makeLineBar
+     }
 
 // close onload function
 }
 
+/*Three simular functions to hide the line, when clicked on box*/
+function hideLineVandalism(){
 
-
-function hideLineThree(){
-
-  line = d3.select("#lineThree")
+  line = d3.select("#lineVandalism")
   if (line.attr("visibility") == "visible") {
     line.attr("visibility", "hidden");
   } else {
@@ -648,9 +605,9 @@ function hideLineThree(){
 
 }
 
-function hideLineTwo(){
+function hideLineCapital(){
 
-  line = d3.select("#lineTwo")
+  line = d3.select("#lineCapital")
   if (line.attr("visibility") == "visible") {
     line.attr("visibility", "hidden");
   } else {
@@ -659,13 +616,46 @@ function hideLineTwo(){
 
 }
 
-function hideLineFour(){
+function hideLineViolence(){
 
-  line = d3.select("#lineFour")
+  line = d3.select("#lineViolence")
   if (line.attr("visibility") == "visible") {
     line.attr("visibility", "hidden");
   } else {
     line.attr("visibility", "visible")
   }
 
+}
+
+/*checkBucket to give color to barchart*/
+function checkBucket(n){
+
+  // give specific color accordingly to percentages
+  if (n < 20) {
+    return 'rgb(178,24,43)'
+  }
+  if (n < 30) {
+    return 'rgb(214,96,77)'
+  }
+  if (n < 40) {
+    return 'rgb(244,165,130)'
+  }
+  if (n < 50) {
+    return 'rgb(253,219,199)'
+  }
+  if (n < 60) {
+    return 'rgb(209,229,240)'
+  }
+  if (n < 70){
+    return 'rgb(146,197,222)'
+  }
+  if (n < 80){
+    return 'rgb(67,147,195)'
+  }
+  if (n < 90){
+    return 'rgb(33,102,172)'
+  }
+  if (n < 10){
+    return 'rgb(5,48,97)'
+  }
 }
