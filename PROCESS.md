@@ -28,24 +28,24 @@ Also: tooltip in map is not working if added class through stylesheet (why?).
 
 page of Europe is working, but style not yet. Also I am missing a link between years and updating the barchart.
 
-![processOne](doc/pic/process2.jpeg)
+![processOne](docs/pic/process2.jpeg)
 
 page Netherlands needs some attention. Still need to make scatterplot and second linegraph.
 IDEA: maybe make new CSS for Netherlands
 
-![processTwo](doc/pic/process1.jpg)
+![processTwo](docs/pic/process1.jpg)
 
 # day 10 (17-6-2018)
 
 worked on multi line graph today. Data structure not right yet, also in doubt which statistics
 should be showing (one from 1950 till now, missing feeling of safety OR one from 1999 to now (missing 2010 and 2011) including feeling of safety). Also dat structure not yet right, but working.
 
-![processSunday](doc/pic/176.png)
+![processSunday](docs/pic/176.png)
 
 tried to make the scatter aswell - only to realize that six years is
 not a lot... Also saw that I have been using some wrong data for the charts (line graph should have been crime rate in total, not burglaryRate). And should try to make scatterplot with two different datasets, not sure if possible (did not work so well when I tried):
 
-![processSunday](doc/pic/176(2).png)
+![processSunday](docs/pic/176(2).png)
 
 So on MONDAY (& rest of week):
 - decide on charts
@@ -61,11 +61,11 @@ So on MONDAY (& rest of week):
 Adjusted the idea of the scatterplot after Stand Ups. They advised to use the data set of the
 Netherlands and build on this one to make an interactive chart. I tried to do that and it worked, as shown in the second picture. I also adjested the axes of the other two figures.
 Happy with the progress I made today! :)
-![processSunday](doc/pic/186.png)
+![processSunday](docs/pic/186.png)
 
 after click on specific bar:
 
-![processSunday](doc/pic/186(2).png)
+![processSunday](docs/pic/186(2).png)
 
 # day 12 (19-6)
 
@@ -84,14 +84,14 @@ PAGE NL:
 - CHECK make check boxes multi-line
 - (maybe tonight) possible make button to change years in barchart netherlands
 
-![processWednesday](doc/pic/216.png)
+![processWednesday](docs/pic/216.png)
 
 PAGE EU:
 
 - CHECK (but still something wrong with transform/translate I think and does not work when years are changed,
   this did work before so not sure when it broke) fix barchart!!!
 
-![processWednesday](doc/pic/216(2).png)
+![processWednesday](docs/pic/216(2).png)
 
 BOTH:
 
@@ -115,3 +115,8 @@ Tomorrow: clean code EU and NL / clean html
 # day 18 (26-6)
 
 fixed the titles today, worked on the story page and html style & did code review for Jochem.
+
+# day 19 (27-6)
+
+worked on cleaning the code today, made pages, cleaned the github. Changed some styling. Not happy with the colors so far, but if need to be color blind, maybe these
+are the best. 
