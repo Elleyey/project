@@ -596,13 +596,15 @@ window.onload = function() {
 /*Three simular functions to hide the line, when clicked on box*/
 function hideLineVandalism(){
 
-  line = d3.select("#lineVandalism")
-  if (line.attr("visibility") == "visible") {
-    line.attr("visibility", "hidden");
-  } else {
-    line.attr("visibility", "visible")
+  if ($("div").attr("LineThreeCheck") == "vanalism"){
+    line = d3.select("#lineVandalism")
+    if (line.attr("visibility") == "visible") {
+      line.attr("visibility", "hidden");
+    }
+    else {
+      line.attr("visibility", "visible")
+    }
   }
-
 }
 
 function hideLineCapital(){
