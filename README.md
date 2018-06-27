@@ -13,3 +13,5 @@
 - D3 - Copyright 2010-2017 Mike Bostock
 
 - D3 tip - Copyright (c) 2013 Justin Palmer
+
+- Datamaps - The MIT License (MIT) Copyright (c) 2012 Mark DiMarco
