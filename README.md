@@ -2,8 +2,6 @@
 
 **Application name**: The string from the mailbox - crime rates and trust.
 
-**Screenshots and purpose of them**:
-
 **Name**: Ellemijke Donner.
 
 **Copyright statement**:
@@ -17,3 +15,13 @@
 - D3 tip - Copyright (c) 2013 Justin Palmer
 
 - Datamaps - The MIT License (MIT) Copyright (c) 2012 Mark DiMarco
+
+
+**Screenshots**:
+
+The website first introduces the user to the theme, and then let's the user
+work it's way through it. 
+
+![PageOne](docs/pic/readme(1).png)
+![PageTwo](docs/pic/readme(2).png)
+![PageThree](docs/pic/readme(3).png)
