@@ -597,7 +597,7 @@ window.onload = function() {
 
 /*Three simular functions to hide the line, when clicked on box*/
 function hideLine(id){
-
+    console.log(id);
     line = d3.select("#Line" + id)
     if (line.attr("visibility") == "visible") {
       line.attr("visibility", "hidden");
