@@ -6,7 +6,9 @@
 
 **Name**: Ellemijke Donner.
 
-**Copyright statement**: for copyright of this project see LICENSE.md.
+**Copyright statement**:
+
+- Copyright of this project: Copyright (c) 2018 Ellemijke Donner under MIT License.
 
 - The video showing Jan Terlouw is property of DWDD - DWDD 2016.
 
