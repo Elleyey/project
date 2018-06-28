@@ -1,5 +1,7 @@
 **Link to website**: https://elleyey.github.io/project/webpage/html/index.html
 
+**Link to video**: https://www.youtube.com/watch?v=-pYjQO9zNRw
+
 **Application name**: The string from the mailbox - crime rates and trust.
 
 **Name**: Ellemijke Donner.
