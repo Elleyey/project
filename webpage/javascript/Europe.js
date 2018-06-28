@@ -1,4 +1,6 @@
-/*JavaScript for page about Europe, by Ellemijke Donner, 10734198,
+/*JavaScript for page about Europe
+By Ellemijke Donner
+10734198,
 for final project programmeren.*/
 
 // define global values to use later
@@ -73,8 +75,8 @@ window.onload = function() {
         updateMap(dataYear);
         updateBars(dataFiltered);
         }
-     // close filterMap
-     };
+      // close filterMap
+      };
 
     /* makeMap - make data map, fill colors according to values, call makeBars*/
     function makeMap(dataMap) {
@@ -97,12 +99,12 @@ window.onload = function() {
         },
         fills: {
           // set colors of map
-          defaultFill: 'rgb(247,247,247)',
-          '<2':'rgb(178,24,43)',
-          '2-4':'rgb(239,138,98)',
-          '4-6':'rgb(209,229,240)',
-          '6-8':'rgb(103,169,207)',
-          '8-10':'rgb(33,102,172)'
+          defaultFill: 'rgb(247, 247, 247)',
+          '<2':'rgb(178, 24, 43)',
+          '2-4':'rgb(239, 138, 98)',
+          '4-6':'rgb(209, 229, 240)',
+          '6-8':'rgb(103, 169, 207)',
+          '8-10':'rgb(33, 102, 172)'
         },
         data: dataMap,
         // set tooltip
@@ -122,6 +124,8 @@ window.onload = function() {
               var myObj = JSON.parse(this.dataset.info);
               var countryCode = myObj.country;
               var ISOCode = myObj.ISO;
+
+              // change global variables
               selectedCountry = countryEnglish;
               selectedISO = ISOCode;
 

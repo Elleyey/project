@@ -1,4 +1,7 @@
-/*CSS styling for javascript and html, by Ellemijke Donner, 10734198, for final project minor.*/
+/*CSS styling for javascript and html
+by Ellemijke Donner
+10734198
+for final project minor.*/
 
 /*Tooltips for barchart EU, barchart NL, linegraph NL */
 
@@ -31,6 +34,7 @@
 }
 
 /* Set titles and text for graphs*/
+
 .title-multi-line{
 	font: 18px calibri;
 	font-weight: bold;
@@ -91,8 +95,9 @@ p2
 }
 
 /* Styling for line graphs */
+
 path {
-    stroke: rgb(67,147,195);
+    stroke: rgb(67, 147, 195);
     stroke-width: 2;
     fill: none;
 }
