@@ -99,7 +99,7 @@ window.onload = function() {
         },
         fills: {
           // set colors of map
-          defaultFill: 'rgb(247, 247, 247)',
+          defaultFill: 'rgb(255,245,238)',
           '<2':'rgb(178, 24, 43)',
           '2-4':'rgb(239, 138, 98)',
           '4-6':'rgb(209, 229, 240)',

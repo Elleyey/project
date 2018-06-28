@@ -461,7 +461,7 @@ window.onload = function() {
       svg.append("path")
           .attr("id", "lineFraude")
           .attr("d", lineCapital(dataCrime))
-          .style("stroke", "rgb(253, 174, 97)")
+          .style("stroke", "rgb(244,165,130)")
           .attr("visibility", "visible");
 
       // make line violence
@@ -598,7 +598,7 @@ window.onload = function() {
 /*Three simular functions to hide the line, when clicked on box*/
 function hideLine(id){
     console.log(id);
-    line = d3.select("#Line" + id)
+    line = d3.select("#line" + id)
     if (line.attr("visibility") == "visible") {
       line.attr("visibility", "hidden");
     }
@@ -606,28 +606,6 @@ function hideLine(id){
       line.attr("visibility", "visible")
     }
   }
-
-function hideLineCapital(){
-
-  line = d3.select("#lineCapital")
-  if (line.attr("visibility") == "visible") {
-    line.attr("visibility", "hidden");
-  } else {
-    line.attr("visibility", "visible")
-  }
-
-}
-
-function hideLineViolence(){
-
-  line = d3.select("#lineViolence")
-  if (line.attr("visibility") == "visible") {
-    line.attr("visibility", "hidden");
-  } else {
-    line.attr("visibility", "visible")
-  }
-
-}
 
 /*checkBucket to give color to barchart*/
 function checkBucket(n){
