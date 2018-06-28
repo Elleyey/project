@@ -6,9 +6,9 @@ for final project programmeren.*/
 window.onload = function() {
 
   queue()
-    .defer(d3.json, '/data/Burglary.json')
-    .defer(d3.json, '/data/Netherlands.json')
-    .defer(d3.json, '/data/crimeRatesTotals.json')
+    .defer(d3.json, '../data/Burglary.json')
+    .defer(d3.json, '../data/Netherlands.json')
+    .defer(d3.json, '../data/crimeRatesTotals.json')
     .awaitAll(getData);
 
     /*getData to reformat data, to be able to use it in different graphs. Calls
