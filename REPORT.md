@@ -15,10 +15,10 @@ I intended to make six visualizations, but dropped one (the scatterplot). I will
 
 Uses datamaps to show map of Europe. Barchart is always shown. Map of Europe and barchar get updated by button with years.
 
-###Overview:
+### Overview:
 > Europe.js works with eight functions. Two concerning data format, two for making the map and the barchart, three for updating these visualizations and one funtion to give the just colour to the barchart.  
 
-###Specification:
+### Specification:
 
 Functions used:  
 - In window.onload:
@@ -59,10 +59,10 @@ Functions used:
 
 ### Netherlands.HTML
 
-###Overview:
+### Overview:
 > Netherlands.js works with seven functions. One concerning data format, four concerning the graphs. One function to change the visability of a line when checkbox is checked out. One function to give colour to the barchart (different than in Europe.js, although colours are the same, because scaling is different).
 
-###Specification:
+### Specification:
 
 - In window onload:
 
@@ -113,4 +113,4 @@ Functions used:
 
 ## Decisions
 
-I decided to skip the scatterplot as it would not give any extra information about the data, and was not really representative with just six data points. Also replaced the slide bar with years for a button with years, as a slide bar would be to easy to move around and the barchart and datamaps would change the whole time which would not give a nice overview of the website. It was easier to make the graphs than expected, it was harder than expected to implement interactive elements. It was really difficult for me to work with the different kinds of data. I just now have the feeling that I know how to work with it, and if I had more time I would try work with the data I made in the Python script instead of de getData function I made in Netherlands.js. The colors I chose are colourblind friendly, which is important, but if I would have more time to spent on it I would try to find another colour scheme. 
+I decided to skip the scatterplot as it would not give any extra information about the data, and was not really representative with just six data points. Also replaced the slide bar with years for a button with years, as a slide bar would be to easy to move around and the barchart and datamaps would change the whole time which would not give a nice overview of the website. It was easier to make the graphs than expected, it was harder than expected to implement interactive elements. It was really difficult for me to work with the different kinds of data. I just now have the feeling that I know how to work with it, and if I had more time I would try work with the data I made in the Python script instead of de getData function I made in Netherlands.js. The colors I chose are colourblind friendly, which is important, but if I would have more time to spent on it I would try to find another colour scheme.
