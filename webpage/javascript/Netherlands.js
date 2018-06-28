@@ -419,7 +419,7 @@ window.onload = function() {
       svg.append("path")
           .attr("class", "line")
           .attr("d", lineTotal(dataCrime))
-          .style("stroke", "red");
+          .style("stroke", "rgb(215, 25, 28)");
 
       // draw x axis
       svg.append("g")
@@ -445,7 +445,7 @@ window.onload = function() {
       svg.append("path")
           .attr("id", "lineVandalism")
           .attr("d", lineVandalism(dataCrime))
-          .style("stroke", "blue")
+          .style("stroke", "rgb(44, 123, 182)")
           .attr("visibility", "visible");
 
       // make line capital
@@ -461,7 +461,7 @@ window.onload = function() {
       svg.append("path")
           .attr("id", "lineFraude")
           .attr("d", lineCapital(dataCrime))
-          .style("stroke", "pink")
+          .style("stroke", "rgb(253, 174, 97)")
           .attr("visibility", "visible");
 
       // make line violence
@@ -477,7 +477,7 @@ window.onload = function() {
       svg.append("path")
           .attr("id", "lineViolence")
           .attr("d", lineViolence(dataCrime))
-          .style("stroke", "light-blue")
+          .style("stroke", "rgb(171, 217, 233)")
           .attr("visibility", "visible");
 
       // write text y axis
@@ -502,7 +502,7 @@ window.onload = function() {
             .attr("cy", 23)
             .attr("cx", 465)
             .attr("r", 5)
-            .style("fill", "red");
+            .style("fill", "rgb(215, 25, 28)");
 
       // append first part of text, next to the dot
       svg.append("text")
