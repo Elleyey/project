@@ -109,7 +109,7 @@ Functions used:
 > Implemented the update functions for Europe only in the last weeks. Should have done this earlier - but did not know how, so just started on working on the graphs. Appeared to be easier than expected. But still didn't figure out how to do this for the line chart that appears when clicked on a bar in the Netherlands javascript..
 
 **Language**
-> Just assumed the project had to be done in English, and started in English (although my proposal was in Dutch so don't know how and when it changed in my head?). Did not realize I could do it in Dutch untill a few days ago - when it was a bit to late. Not just for README, REPORT, PROCESS etc. but also for the site. The site is half focussed on the Netherlands, and the introduction video is in Dutch, as is the report referred to in the Netherlands page. Should have thought about this better.
+> Just assumed the project had to be done in English, and started the DESIGN and PROCESS in English (although my proposal was in Dutch so don't know how and when it changed in my head?). Did not realize I could do it in Dutch untill a few days ago - when it was a bit to late. For the website I did think this through: I want it to be accessable for a bigger audience (English speakers), therefore the text and visualizations are avaliable in English. The introduction video and report about datacrime are only avaliable in Dutch, therefore not necessary to understand the site, but do give some extra information to Dutch speakers.
 
 ## Decisions
 
