@@ -28,7 +28,7 @@ for final project programmeren. Got code for navbar from https://getbootstrap.co
     <link rel="stylesheet" href="css/styles.css"  type="text/css"></link>
 
     <!-- used javascript -->
-    <script src="../javascript/Netherlands.js"></script>
+    <script src="../project/webpage/javascript/Netherlands.js"></script>
     <title>Trust and Crime in the Netherlands</title>
   </head>
     <body>
@@ -64,9 +64,9 @@ for final project programmeren. Got code for navbar from https://getbootstrap.co
       <div class="title-multi-line" style="position: absolute; left: 240px; top: 520px;"> Total crime rates </div>
       <div width="300" style="position: absolute; left: 710px; top: 760px">
         <form>
-          <div><input type="checkbox" checked id="lineTwoCheck" onclick="hideLineCapital();"> <font color="pink"> Fraude </font></div>
-          <div><input type="checkbox" checked id="LineThreeCheck" onclick="hideLineVandalism();"> <font color="light-blue"> Vandalism </font></div>
-          <div><input type="checkbox" checked id="LineFourCheck" onclick="hideLineViolence();"> <font color="steelblue"> Violence </font></div>
+          <div><input type="checkbox" checked id="Fraude" onclick="hideLine(id);"> <font color="pink"> Fraude </font></div>
+          <div><input type="checkbox" checked id="Vandalism" onclick="hideLine(id);"> <font color="light-blue"> Vandalism </font></div>
+          <div><input type="checkbox" checked id="Violence" onclick="hideLine(id);"> <font color="steelblue"> Violence </font></div>
         </form>
       </div>
       <svg id="container-line-multi" width="670" height="400" style="position: absolute; left: 30px; top: 500px" ></svg>

@@ -457,7 +457,7 @@ window.onload = function() {
 
       // draw line capital
       svg.append("path")
-          .attr("id", "lineCapital")
+          .attr("id", "lineFraude")
           .attr("d", lineCapital(dataCrime))
           .style("stroke", "pink")
           .attr("visibility", "visible");
@@ -594,10 +594,9 @@ window.onload = function() {
 }
 
 /*Three simular functions to hide the line, when clicked on box*/
-function hideLineVandalism(){
+function hideLine(id){
 
-  if ($("div").attr("LineThreeCheck") == "vanalism"){
-    line = d3.select("#lineVandalism")
+    line = d3.select("#Line" + id)
     if (line.attr("visibility") == "visible") {
       line.attr("visibility", "hidden");
     }
@@ -605,7 +604,6 @@ function hideLineVandalism(){
       line.attr("visibility", "visible")
     }
   }
-}
 
 function hideLineCapital(){
 
