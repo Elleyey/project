@@ -1,8 +1,8 @@
 ## Description of application
 
-Inspired by Jan Terlouw his speech about the decreasing trust and by politicians stating that the Netherlands are a becomming narco-state, I decided to make a data visualization about these two subjects. On one hand I wanted to show how trust rates are really increasing in the Netherlands, on the other how crime rates are actually decreasing. This to show that it is always important to fact-check!
+Inspired by Jan Terlouw his speech about the decreasing trust and by politicians stating that the Netherlands are a becomming narco-state, I decided to make a data visualization about these two subjects. On one hand I wanted to show how trust rates are really increasing in the Netherlands, on the other how crime rates are actually decreasing. This to show that it is always important to fact-check! The screenshot shows a the page of the site about the Netherlands - as this is the one containing the most information.
 
-- SCREENSHOT
+![pageNetherlands](docs/pic/readme(3).png)
 
 ## Description of technical design
 
