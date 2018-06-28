@@ -78,7 +78,7 @@ window.onload = function() {
       // close filterMap
       };
 
-    /* makeMap - make data map, fill colors according to values, call makeBars*/
+    /* makeMap - make data map, fill colors according to values, call updateBars*/
     function makeMap(dataMap) {
 
       // use datamaps, zoom in on Europe

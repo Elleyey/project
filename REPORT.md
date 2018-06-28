@@ -1,6 +1,6 @@
 ## Description of application
 
-Inspired by Jan Terlouw his speech about the decreasing trust and by politicians stating that the Netherlands are a becomming narco-state, I decided to make a data visualization about these two subjects. On one hand I wanted to show how trust rates are really increasing in the Neterlands, on the other how crime rates are actually decreasing. This to show that it is always important to fact-check!
+Inspired by Jan Terlouw his speech about the decreasing trust and by politicians stating that the Netherlands are a becomming narco-state, I decided to make a data visualization about these two subjects. On one hand I wanted to show how trust rates are really increasing in the Netherlands, on the other how crime rates are actually decreasing. This to show that it is always important to fact-check!
 
 - SCREENSHOT
 
@@ -13,78 +13,88 @@ I intended to make six visualizations, but dropped one (the scatterplot). I will
 
 ### Europe.HTML
 
-Uses datamaps to show map of Europe. Barchart is always shown. Map of Europe gets updated by button with years - as does barchart.
+Uses datamaps to show map of Europe. Barchart is always shown. Map of Europe and barchar get updated by button with years.
+
+###Overview:
+> Europe.js works with eight functions. Two concerning data format, two for making the map and the barchart, three for updating these visualizations and one funtion to give the just colour to the barchart.  
+
+###Specification:
 
 Functions used:  
 - In window.onload:
 
-  - getData (filterMap, makeMap, makeBars)
+  - getData (filterMap, makeMap, makeBars).
 
-  *gets the Data in the right format and calls basic functions needed for starting page.*
+  *Gets the Data in the right format and calls basic functions needed for drawing the page.*
 
-  - filterMap(onChange, filterData, updateMap, updateBars)
+  - filterMap(onChange, filterData, updateMap, updateBars).
 
-  *filters the map onChange of the button, calls updateMap and updateBars accordingly*
+  *Filters the map on change of the button, calls updateMap and updateBars accordingly.*
 
-  - makeMap (filterData, updateBars)
+  - makeMap (filterData, updateBars).
 
-  *makes the map, uses the global given variables of selected country and selected ISO (default on Netherlands)*
+  *Makes the map, uses the global given variables of selected country and selected ISO (default on Netherlands). Also updates the barchart according to country clicked on by user.*
 
-  - makeBars (checkBucket)
+  - makeBars (checkBucket).
 
-  *makes the bars with Netherlands 2002 as default. CheckBucket used to give color to bars.*
+  *Makes the bars with Netherlands 2002 as default. CheckBucket used to give colour to bars.*
 
 - Outside window.onload:
 
-  - checkBucket
+  - checkBucket.
 
-  *gives color to value, according to scale used*
+  *Gives colour to value, according to scale used*
 
-  - updateMap
+  - updateMap.
 
-  *updates colors of the map*
+  *Updates colours of the map according to values of year, chosen by user.*
 
-  - updateBars
+  - updateBars.
 
-  *updates the values of the bar*
+  *Updates the values of the bar, according to either country clicked on by user OR new year.*
 
-  - filterData
+  - filterData.
 
-  *need to filter some variables from the data, like fill key and country or year, done by this function*
+  *Filters some variables from the data, like fill key and country or year, done by this function when called.*
 
 ### Netherlands.HTML
 
+###Overview:
+> Netherlands.js works with seven functions. One concerning data format, four concerning the graphs. One function to change the visability of a line when checkbox is checked out. One function to give colour to the barchart (different than in Europe.js, although colours are the same, because scaling is different).
+
+###Specification:
+
 - In window onload:
 
-  - getData (makeBar, makeLine, makeMultiline)
+  - getData (makeBar, makeLine, makeMultiline).
 
   *Puts the data in the right format, calls makeBar (default NL 2012), calls makeLine (static one of home burglary rates from 2012 to 2017), calls makeMultiLine (makes four lines in one graph).*
 
-  - makeBar (makeLineBar);
+  - makeBar (makeLineBar).
 
   *Makes a bar chart with the data from Dutch trust rates in 2012. When a bar is clicked, another line chart appears in the (single) line chart.*
 
-  - makeLine
+  - makeLine.
 
   *Makes a line chart with home burglary rates over the years.*
 
-  - makeMultiLine
+  - makeMultiLine.
 
-  *Makes four lines in one barchart, that can be switched on and off (through HTML code and function further in code), also have a reference to another article.*
+  *Makes four lines in one barchart, that can be switched on and off (through HTML code and function further in code), also have a reference to another article. Line with total crime rates is red and is not possible to switch on or of.*
 
-  - makeLineBar
+  - makeLineBar.
 
   *Makes the line, when clicked on a specific bar in the barchart, a line shows in the single line graph.*
 
 - Outside window onload:
 
-  - hideLine
+  - hideLine.
 
   *Hides the line clicked on by checkboxes in HTML by users.*
 
-  - CheckBucket
+  - CheckBucket.
 
-  *Gives color to barchart.*
+  *Gives colour to barchart.*
 
 
 ## Challenges
@@ -103,4 +113,4 @@ Functions used:
 
 ## Decisions
 
-I decided to skip the scatterplot as it would not give any extra information about the data, and was not really representative with just six data points. Also replaced the slide bar with years for a button with years, as a slide bar would be to easy to move around and the barchart and datamaps would change the whole time which would not be a nice design choice. It was easier to make the graphs than expected, it was harder to implement interactive elements. It was also difficult for me to work with the different kinds of data. To be able to start to work with the data used in the javascript Netherlands page, I rearranged the data, which was a trade of in my javascript. If I had more time I would thus try to make this dataformat better in the first place.
+I decided to skip the scatterplot as it would not give any extra information about the data, and was not really representative with just six data points. Also replaced the slide bar with years for a button with years, as a slide bar would be to easy to move around and the barchart and datamaps would change the whole time which would not give a nice overview of the website. It was easier to make the graphs than expected, it was harder than expected to implement interactive elements. It was really difficult for me to work with the different kinds of data. I just now have the feeling that I know how to work with it, and if I had more time I would try work with the data I made in the Python script instead of de getData function I made in Netherlands.js. The colors I chose are colourblind friendly, which is important, but if I would have more time to spent on it I would try to find another colourscheme. 
