@@ -36,15 +36,17 @@ for final project minor.*/
 /* Set titles and text for graphs*/
 
 .title-multi-line{
-	font: 18px calibri;
+	font: 14px calibri;
 	font-weight: bold;
+	text-decoration: underline;
 }
 
 .title-normal{
-	font: 16px calibri;
+	font: 14px calibri;
 	font-weight: bold;
 	color: black;
 	text-align: center;
+	text-decoration: underline;
 }
 
 .graph-text{

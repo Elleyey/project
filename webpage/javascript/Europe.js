@@ -143,7 +143,7 @@ window.onload = function() {
 
       // set title for legend
       var legendMap = {
-        legendTitle: "Trust in humanity on scale 1 to 10"
+        legendTitle: "Trust in humanity on scale 1 to 10",
       }
 
       // draw lagend
@@ -242,13 +242,11 @@ window.onload = function() {
 
       // write title
       svg.append("text")
-            .attr("class", "title-bar-EU")
-            .attr("y", - 18)
-            .attr("x", 100)
+            .attr("id", "bar-title")
+            .attr("class", "title-normal")
+            .attr("y", - 20)
+            .attr("x", 50)
             .attr("dy", "1em")
-            .style("text-anchor", "middle")
-            .style("font-size", "14px")
-            .style("font-family", "calibri")
             .text("Trust in " + selectedCountry);
 
       // append xAxis title
@@ -332,13 +330,9 @@ function updateBars(data){
         })
 
   // re-write title
-  d3.select(".title-bar-EU")
+  d3.select("#bar-title")
           .attr("y", - 18)
-          .attr("x", 100)
-          .attr("dy", "1em")
-          .style("text-anchor", "middle")
-          .style("font-size", "14px")
-          .style("font-family", "calibri")
+          .attr("x", 50)
           .text("Trust in " + data.country);
 
  // close updateBars

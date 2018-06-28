@@ -512,7 +512,7 @@ window.onload = function() {
             .style("font-family", "calibri")
             .style("text-anchor", "middle")
             .text("The Mystery of")
-            .style("text-decoration", "underline")
+            .attr("fill", "blue")
             .on("click", function() {
                   window.open("https://www.cbs.nl/nl-nl/achtergrond/2018/19/het-mysterie-van-de-verdwenen-criminaliteit");
             });
@@ -525,7 +525,7 @@ window.onload = function() {
             .style("font-family", "calibri")
             .style("text-anchor", "middle")
             .text("the Decreasing Crime")
-            .style("text-decoration", "underline")
+            .attr("fill", "blue")
             .on("click", function() {
                 window.open("https://www.cbs.nl/nl-nl/achtergrond/2018/19/het-mysterie-van-de-verdwenen-criminaliteit");
             });
@@ -563,7 +563,7 @@ window.onload = function() {
       // make tip
       var tip = d3.tip()
                   .attr("class", "tooltipLineNL")
-                  .offset([-20, 0])
+                  .offset([-10, 0])
                   .html(function (d) {
                     return "<tip-visible><span>" + (d[selectedBar]) + "% of trust in " + selectedBar + "</span>"
                   });
